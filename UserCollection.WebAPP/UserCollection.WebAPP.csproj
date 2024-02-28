@@ -15,4 +15,9 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="6.0.24" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\UserCollection.Services.WebAPI\UserCollection.Services.WebAPI.csproj" />
+    <ProjectReference Include="..\UserCollection.Services\UserCollection.Services.csproj" />
+  </ItemGroup>
+
 </Project>

@@ -10,4 +10,10 @@
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\UserCollection.Services.Database\UserCollection.Services.Database.csproj" />
+    <ProjectReference Include="..\UserCollection.Services\UserCollection.Services.csproj" />
+    <ProjectReference Include="..\UserCollection.WebAPI.Models\UserCollection.WebAPI.Models.csproj" />
+  </ItemGroup>
+
 </Project>
