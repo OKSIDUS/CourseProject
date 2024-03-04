@@ -1,3 +1,6 @@
+using Microsoft.EntityFrameworkCore;
+using UserCollection.Services.Database;
+
 namespace UserCollection.WebAPI
 {
     public class Program
@@ -12,6 +15,10 @@ namespace UserCollection.WebAPI
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
+
+            var connectionString = builder.Configuration.GetConnectionString("Collection") ?? throw new InvalidOperationException("Connection string 'UserCollection' not found.");
+            builder.Services.AddDbContext<ApplicationDBContext>(options =>
+                options.UseSqlServer(connectionString));
 
             var app = builder.Build();
 
