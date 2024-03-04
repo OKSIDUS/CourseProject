@@ -10,6 +10,8 @@ namespace UserCollection.Services.Database.Entities
 
         public int CollectionId { get; set; }
         public CollectionEntity Collection { get; set; } = null!;
+
+        public ICollection<ItemsTagsEntity> ItemsTags { get; set; } = new List<ItemsTagsEntity>();
         public int CustomIntField1Data { get; set; }
         public int CustomIntField2Data { get; set; }
         public int CustomIntField3Data { get; set; }

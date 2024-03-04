@@ -12,6 +12,10 @@ namespace UserCollection.Services.Database
 
         public DbSet<ItemEntity> Items { get; set; }
 
+        public DbSet<TagEntity> Tags { get; set; }
+
+        public DbSet<ItemsTagsEntity> ItemsTags { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<CollectionEntity>()
@@ -28,6 +32,22 @@ namespace UserCollection.Services.Database
                 .IsRequired()
                 .OnDelete(DeleteBehavior.Cascade);
 
+            modelBuilder.Entity<ItemsTagsEntity>()
+        .HasKey(it => new { it.ItemId, it.TagId });
+
+            modelBuilder.Entity<ItemsTagsEntity>()
+                .HasOne(it => it.Item)
+                .WithMany(i => i.ItemsTags)
+                .HasForeignKey(it => it.ItemId)
+                .IsRequired()
+                .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<ItemsTagsEntity>()
+                .HasOne(it => it.Tag)
+                .WithMany(t => t.ItemsTags)
+                .HasForeignKey(it => it.TagId)
+                .IsRequired()
+                .OnDelete(DeleteBehavior.Cascade);
         }
     }
 }
