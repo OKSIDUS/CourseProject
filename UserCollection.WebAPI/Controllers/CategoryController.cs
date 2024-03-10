@@ -49,5 +49,17 @@ namespace UserCollection.WebAPI.Controllers
             await service.DeleteCategoryAsync(id);
             return Ok();
         }
+
+        [HttpPost("/Category/Update")]
+        public async Task<IActionResult> Update(CollectionCategoryModel category)
+        {
+            if (category is null)
+            {
+                return BadRequest();
+            }
+
+            await service.UpdateCategoryAsync(category);
+            return Ok();
+        }
     }
 }

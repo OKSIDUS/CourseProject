@@ -49,9 +49,17 @@ namespace UserCollection.Services.Database.Services
             return mapper.Map<CollectionCategoryModel>(category);
         }
 
-        public Task UpdateCategoryAsync(CollectionCategoryModel category)
+        public async Task UpdateCategoryAsync(CollectionCategoryModel category)
         {
-            throw new NotImplementedException();
+            var categoryEntity = await dbContext.Categories.Where(c => c.Id == category.Id).FirstOrDefaultAsync();
+            if (categoryEntity is not null)
+            {
+                mapper.Map(category, categoryEntity);
+
+                dbContext.Categories.Update(categoryEntity);
+
+                await dbContext.SaveChangesAsync();
+            }
         }
     }
 }
