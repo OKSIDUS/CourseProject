@@ -12,6 +12,18 @@ namespace UserCollection.WebAPI.Controllers
             this.service = service;
         }
 
+        [HttpGet("/Category/{id}")]
+        public async Task<IActionResult> GetCategory(int id)
+        {
+            var category = await service.GetCategoryAsync(id);
+            if (category is null)
+            {
+                return BadRequest();
+            }
+
+            return Ok(category);
+        }
+
         [HttpGet("/Category")]
         public async Task<IActionResult> GetAll()
         {

@@ -38,9 +38,10 @@ namespace UserCollection.Services.Database.Services
             return categories.Select(c => mapper.Map<CollectionCategoryModel>(c));
         }
 
-        public Task<CollectionCategoryModel> GetCategoryAsync(int id)
+        public async Task<CollectionCategoryModel> GetCategoryAsync(int id)
         {
-            throw new NotImplementedException();
+            var category = await dbContext.Categories.Where(c => c.Id == id).FirstOrDefaultAsync();
+            return mapper.Map<CollectionCategoryModel>(category);
         }
 
         public Task UpdateCategoryAsync(CollectionCategoryModel category)
