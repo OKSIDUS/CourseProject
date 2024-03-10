@@ -27,9 +27,14 @@ namespace UserCollection.Services.Database.Services
             }
         }
 
-        public Task DeleteCategoryAsync(CollectionCategoryModel category)
+        public async Task DeleteCategoryAsync(int id)
         {
-            throw new NotImplementedException();
+            var category = await dbContext.Categories.Where(c => c.Id == id).FirstOrDefaultAsync();
+            if(category is not null)
+            {
+                dbContext.Categories.Remove(category);
+                await dbContext.SaveChangesAsync();
+            }
         }
 
         public async Task<IEnumerable<CollectionCategoryModel>> GetAllCategoriesAsync()

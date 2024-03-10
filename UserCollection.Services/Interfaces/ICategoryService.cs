@@ -8,7 +8,7 @@ namespace UserCollection.Services.Interfaces
 
         public Task UpdateCategoryAsync(CollectionCategoryModel category);
 
-        public Task DeleteCategoryAsync(CollectionCategoryModel category);
+        public Task DeleteCategoryAsync(int id);
 
         public Task<CollectionCategoryModel> GetCategoryAsync(int id);
 

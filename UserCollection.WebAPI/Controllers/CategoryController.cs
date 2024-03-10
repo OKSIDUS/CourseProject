@@ -42,5 +42,12 @@ namespace UserCollection.WebAPI.Controllers
             await service.AddCategoryAsync(categoryModel);
             return Ok();
         }
+
+        [HttpDelete("/Category/Delete/{id}")]
+        public async Task<IActionResult> Delete(int id)
+        {
+            await service.DeleteCategoryAsync(id);
+            return Ok();
+        }
     }
 }
