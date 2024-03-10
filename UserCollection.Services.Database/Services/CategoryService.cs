@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 using UserCollection.Services.Database.Entities;
 using UserCollection.Services.Interfaces;
 using UserCollection.WebAPI.Models;
@@ -31,9 +32,10 @@ namespace UserCollection.Services.Database.Services
             throw new NotImplementedException();
         }
 
-        public Task<IEnumerable<CollectionCategoryModel>> GetAllCategoriesAsync()
+        public async Task<IEnumerable<CollectionCategoryModel>> GetAllCategoriesAsync()
         {
-            throw new NotImplementedException();
+            var categories = await dbContext.Categories.ToListAsync();
+            return categories.Select(c => mapper.Map<CollectionCategoryModel>(c));
         }
 
         public Task<CollectionCategoryModel> GetCategoryAsync(int id)

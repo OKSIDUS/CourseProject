@@ -12,9 +12,11 @@ namespace UserCollection.WebAPI.Controllers
             this.service = service;
         }
 
-        public IActionResult Index()
+        [HttpGet("/Category")]
+        public async Task<IActionResult> GetAll()
         {
-            return View();
+            var categories =await service.GetAllCategoriesAsync();
+            return Ok(categories);
         }
 
         [HttpPost("/Category/Create")]
