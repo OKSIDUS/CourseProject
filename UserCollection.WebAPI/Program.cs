@@ -1,5 +1,8 @@
 using Microsoft.EntityFrameworkCore;
+using UserCollection.Common;
 using UserCollection.Services.Database;
+using UserCollection.Services.Database.Services;
+using UserCollection.Services.Interfaces;
 
 namespace UserCollection.WebAPI
 {
@@ -16,9 +19,13 @@ namespace UserCollection.WebAPI
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
+            builder.Services.AddAutoMapper(typeof(MappingProfile));
+
             var connectionString = builder.Configuration.GetConnectionString("Collection") ?? throw new InvalidOperationException("Connection string 'UserCollection' not found.");
             builder.Services.AddDbContext<ApplicationDBContext>(options =>
                 options.UseSqlServer(connectionString));
+
+            builder.Services.AddScoped<ICategoryService, CategoryService>();
 
             var app = builder.Build();
 

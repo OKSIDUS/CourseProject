@@ -29,6 +29,6 @@ namespace UserCollection.WebAPI.Models
         
         public CustomFieldsModel CustomDateTimeFields { get; set; } = new CustomFieldsModel();
 
-        public CustomFieldsModel CustomBoolFilds { get; set; } = new CustomFieldsModel();
+        public CustomFieldsModel CustomBoolFields { get; set; } = new CustomFieldsModel();
     }
 }

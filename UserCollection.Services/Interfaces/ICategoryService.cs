@@ -4,14 +4,14 @@ namespace UserCollection.Services.Interfaces
 {
     public interface ICategoryService
     {
-        public Task AddCategory(CollectionCategoryModel category);
+        public Task AddCategoryAsync(CollectionCategoryModel category);
 
-        public Task UpdateCategory(CollectionCategoryModel category);
+        public Task UpdateCategoryAsync(CollectionCategoryModel category);
 
-        public Task DeleteCategory(CollectionCategoryModel category);
+        public Task DeleteCategoryAsync(CollectionCategoryModel category);
 
-        public Task<CollectionCategoryModel> GetCategory(int id);
+        public Task<CollectionCategoryModel> GetCategoryAsync(int id);
 
-        public Task<IEnumerable<CollectionCategoryModel>> GetAllCategories();
+        public Task<IEnumerable<CollectionCategoryModel>> GetAllCategoriesAsync();
     }
 }
