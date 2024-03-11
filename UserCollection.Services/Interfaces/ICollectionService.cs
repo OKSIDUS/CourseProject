@@ -12,6 +12,6 @@ namespace UserCollection.Services.Interfaces
 
         public Task<IEnumerable<CollectionModel>> GetAllCollectionsAsync();
 
-        public Task UpdateCollection(CollectionModel collection);
+        public Task UpdateCollectionAsync(CollectionModel collection);
     }
 }

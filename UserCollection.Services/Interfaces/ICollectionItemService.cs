@@ -4,15 +4,15 @@ namespace UserCollection.Services.Interfaces
 {
     public interface ICollectionItemService
     {
-        public Task AddItem(ItemModel item);
+        public Task AddItemAsync(ItemModel item);
 
-        public Task UpdateItem(ItemModel item);
+        public Task UpdateItemAsync(ItemModel item);
 
-        public Task DeleteItem(int id);
+        public Task DeleteItemAsync(int id);
 
-        public Task<ItemModel> GetItemById(int id);
+        public Task<ItemModel> GetItemByIdAsync(int id);
 
-        public Task<IEnumerable<ItemModel>> GetAll();
+        public Task<IEnumerable<ItemModel>> GetAllAsync();
 
 
     }
