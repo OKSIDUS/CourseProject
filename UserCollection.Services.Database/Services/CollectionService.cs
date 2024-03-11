@@ -50,7 +50,7 @@ namespace UserCollection.Services.Database.Services
             return mapper.Map<CollectionModel>(collection);
         }
 
-        public async Task UpdateCollection(CollectionModel collection)
+        public async Task UpdateCollectionAsync(CollectionModel collection)
         {
             var collectionEntity = await dbContext.Collections.Where(c => c.Id == collection.Id).FirstOrDefaultAsync();
             if (collectionEntity is not null)
