@@ -1,4 +1,6 @@
 ﻿using AutoMapper;
+using Microsoft.EntityFrameworkCore;
+using UserCollection.Services.Database.Entities;
 using UserCollection.Services.Interfaces;
 using UserCollection.WebAPI.Models;
 
@@ -15,29 +17,62 @@ namespace UserCollection.Services.Database.Services
             this.mapper = mapper;
         }
 
-        public Task AddTag(TagModel tag)
+        public async Task AddTag(TagModel tag)
         {
-            throw new NotImplementedException();
+            if ((tag is not null) && (await CheckItem(tag.ItemId)))
+            {
+                var tagEntity = mapper.Map<TagEntity>(tag);
+                await dbContext.Tags.AddAsync(tagEntity);
+                var itemTagsEntity = new ItemsTagsEntity
+                {
+                    TagId = tag.ItemId,
+                    ItemId = tag.ItemId,
+                };
+                await dbContext.ItemsTags.AddAsync(itemTagsEntity);
+                await dbContext.SaveChangesAsync();
+            }
         }
 
-        public Task DeleteTag(TagModel tag)
+        public async Task DeleteTag(TagModel tag)
         {
-            throw new NotImplementedException();
+            if (tag is not null)
+            {
+                var tagEntity = mapper.Map<TagEntity>(tag);
+                dbContext.Tags.Remove(tagEntity);
+                await dbContext.SaveChangesAsync();
+            }
         }
 
-        public Task<IEnumerable<TagModel>> GetAll()
+        public async Task<IEnumerable<TagModel>> GetAll()
         {
-            throw new NotImplementedException();
+            var tags = await dbContext.Tags.ToListAsync();
+            return tags.Select(t => mapper.Map<TagModel>(t));
         }
 
-        public Task<TagModel> GetTagById(int id)
+        public async Task<TagModel> GetTagById(int id)
         {
-            throw new NotImplementedException();
+            var tag = await dbContext.Tags.Where(t => t.Id == id).FirstOrDefaultAsync();
+            return mapper.Map<TagModel>(tag);
         }
 
-        public Task UpdateTag(TagModel tag)
+        public async Task UpdateTag(TagModel tag)
         {
-            throw new NotImplementedException();
+            if ((tag is not null) && (await CheckItem(tag.ItemId)))
+            {
+                var tagEntity = await dbContext.Tags.Where(t => t.Id == tag.Id).FirstOrDefaultAsync();
+                if (tagEntity is not null)
+                {
+                    mapper.Map(tag, tagEntity);
+                    dbContext.Tags.Update(tagEntity);
+                    await dbContext.SaveChangesAsync();
+                }
+            }
+        }
+
+        private async Task<bool> CheckItem(int itemId)
+        {
+            var item = await dbContext.Items.Where(i => i.Id == itemId).FirstOrDefaultAsync();
+            return item != null;
         }
     }
 }

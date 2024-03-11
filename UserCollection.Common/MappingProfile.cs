@@ -107,6 +107,17 @@ namespace UserCollection.Common
                 .ForMember(dest => dest.CustomTextField1Data, opt => opt.MapFrom(src => src.CustomTextFieldData.CustomField1Data))
                 .ForMember(dest => dest.CustomTextField2Data, opt => opt.MapFrom(src => src.CustomTextFieldData.CustomField2Data))
                 .ForMember(dest => dest.CustomTextField3Data, opt => opt.MapFrom(src => src.CustomTextFieldData.CustomField3Data));
+
+            this.CreateMap<TagEntity, TagModel>()
+                .ForMember(dest => dest.Item, opt => opt.Ignore())
+                .ForMember(dest => dest.ItemId, opt => opt.Ignore())
+                .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Id))
+                .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.Name));
+
+            this.CreateMap<TagModel, TagEntity>()
+                .ForMember(dest => dest.ItemsTags, opt => opt.Ignore())
+                .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Id))
+                .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.Name));
         }
 
         private CustomFieldsModel MapCustomFieldsModel(bool stateOne, string nameOne, bool stateTwo, string nameTwo, bool stateThree, string nameThree)

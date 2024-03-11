@@ -6,6 +6,10 @@
 
         public string Name { get; set; }
 
+        public int ItemId {  get; set; }
+
+        public ItemModel Item { get; set; } = null!;
+
 
     }
 }
