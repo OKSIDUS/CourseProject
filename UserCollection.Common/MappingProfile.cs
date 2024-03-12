@@ -56,31 +56,31 @@ namespace UserCollection.Common
             this.CreateMap<CategoryEntity, CollectionCategoryModel>().ReverseMap();
 
             this.CreateMap<ItemEntity, ItemModel>()
-                .ForMember(dest => dest.CustomDateTimeFieldData, opt => opt.MapFrom(src => new CustomFieldForData<DateTime>
+                .ForMember(dest => dest.CustomDateTimeFieldData, opt => opt.MapFrom(src => new CustomFieldForData<DateTime?>
                 {
                     CustomField1Data = src.CustomDateTimeField1Data,
                     CustomField2Data = src.CustomDateTimeField2Data,
                     CustomField3Data = src.CustomDateTimeField3Data,
                 }))
-                .ForMember(dest => dest.CustomTextFieldData, opt => opt.MapFrom(src => new CustomFieldForData<string>
+                .ForMember(dest => dest.CustomTextFieldData, opt => opt.MapFrom(src => new CustomFieldForData<string?>
                 {
                     CustomField1Data = src.CustomTextField1Data,
                     CustomField2Data = src.CustomTextField2Data,
                     CustomField3Data = src.CustomTextField3Data,
                 }))
-                .ForMember(dest => dest.CustomIntFieldData, opt => opt.MapFrom(src => new CustomFieldForData<int>
+                .ForMember(dest => dest.CustomIntFieldData, opt => opt.MapFrom(src => new CustomFieldForData<int?>
                 {
                     CustomField1Data = src.CustomIntField1Data,
                     CustomField2Data = src.CustomIntField2Data,
                     CustomField3Data = src.CustomIntField3Data,
                 }))
-                .ForMember(dest => dest.CustomBoolFieldData, opt => opt.MapFrom(src => new CustomFieldForData<bool>
+                .ForMember(dest => dest.CustomBoolFieldData, opt => opt.MapFrom(src => new CustomFieldForData<bool?>
                 {
                     CustomField1Data = src.CustomBoolField1Data,
                     CustomField2Data = src.CustomBoolField2Data,
                     CustomField3Data = src.CustomBoolField3Data,
                 }))
-                .ForMember(dest => dest.CustomStringFieldData, opt => opt.MapFrom(src => new CustomFieldForData<string>
+                .ForMember(dest => dest.CustomStringFieldData, opt => opt.MapFrom(src => new CustomFieldForData<string?>
                 {
                     CustomField1Data = src.CustomStringField1Data,
                     CustomField2Data = src.CustomStringField2Data,

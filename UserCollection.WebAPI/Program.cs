@@ -27,6 +27,7 @@ namespace UserCollection.WebAPI
 
             builder.Services.AddScoped<ICategoryService, CategoryService>();
             builder.Services.AddScoped<ICollectionService, CollectionService>();
+            builder.Services.AddScoped<ICollectionItemService, ItemService>();
 
             var app = builder.Build();
 

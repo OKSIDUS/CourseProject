@@ -14,14 +14,14 @@ namespace UserCollection.WebAPI.Models
 
         public ICollection<TagModel> Tags { get; set; } = new List<TagModel>();
 
-        public CustomFieldForData<int> CustomIntFieldData { get; set; } = new CustomFieldForData<int>();
+        public CustomFieldForData<int?> CustomIntFieldData { get; set; } = new CustomFieldForData<int?>();
 
-        public CustomFieldForData<string> CustomStringFieldData { get; set; } = new CustomFieldForData<string>();
+        public CustomFieldForData<string?> CustomStringFieldData { get; set; } = new CustomFieldForData<string?>();
 
-        public CustomFieldForData<string> CustomTextFieldData { get; set; } = new CustomFieldForData<string>();
+        public CustomFieldForData<string?> CustomTextFieldData { get; set; } = new CustomFieldForData<string?>();
 
-        public CustomFieldForData<DateTime> CustomDateTimeFieldData { get; set; } = new CustomFieldForData<DateTime>();
+        public CustomFieldForData<DateTime?> CustomDateTimeFieldData { get; set; } = new CustomFieldForData<DateTime?>();
          
-        public CustomFieldForData<bool> CustomBoolFieldData { get; set; } = new CustomFieldForData<bool>();
+        public CustomFieldForData<bool?> CustomBoolFieldData { get; set; } = new CustomFieldForData<bool?>();
     }
 }
