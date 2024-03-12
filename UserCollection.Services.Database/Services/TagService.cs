@@ -17,45 +17,49 @@ namespace UserCollection.Services.Database.Services
             this.mapper = mapper;
         }
 
-        public async Task AddTag(TagModel tag)
+        public async Task AddTagAsync(TagModel tag)
         {
             if ((tag is not null) && (await CheckItem(tag.ItemId)))
             {
                 var tagEntity = mapper.Map<TagEntity>(tag);
                 await dbContext.Tags.AddAsync(tagEntity);
+                await dbContext.SaveChangesAsync();
+
+                int newId = tagEntity.Id;
                 var itemTagsEntity = new ItemsTagsEntity
                 {
-                    TagId = tag.ItemId,
+                    TagId = newId,
                     ItemId = tag.ItemId,
                 };
                 await dbContext.ItemsTags.AddAsync(itemTagsEntity);
+                
                 await dbContext.SaveChangesAsync();
             }
         }
 
-        public async Task DeleteTag(TagModel tag)
+        public async Task DeleteTagAsync(int id)
         {
+            var tag = await dbContext.Tags.Where(t => t.Id == id).FirstOrDefaultAsync();
             if (tag is not null)
             {
-                var tagEntity = mapper.Map<TagEntity>(tag);
-                dbContext.Tags.Remove(tagEntity);
+                dbContext.Tags.Remove(tag);
                 await dbContext.SaveChangesAsync();
             }
         }
 
-        public async Task<IEnumerable<TagModel>> GetAll()
+        public async Task<IEnumerable<TagModel>> GetAllAsync()
         {
             var tags = await dbContext.Tags.ToListAsync();
             return tags.Select(t => mapper.Map<TagModel>(t));
         }
 
-        public async Task<TagModel> GetTagById(int id)
+        public async Task<TagModel> GetTagByIdAsync(int id)
         {
             var tag = await dbContext.Tags.Where(t => t.Id == id).FirstOrDefaultAsync();
             return mapper.Map<TagModel>(tag);
         }
 
-        public async Task UpdateTag(TagModel tag)
+        public async Task UpdateTagAsync(TagModel tag)
         {
             if ((tag is not null) && (await CheckItem(tag.ItemId)))
             {
