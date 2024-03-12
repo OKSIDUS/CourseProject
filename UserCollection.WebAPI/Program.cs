@@ -26,6 +26,7 @@ namespace UserCollection.WebAPI
                 options.UseSqlServer(connectionString));
 
             builder.Services.AddScoped<ICategoryService, CategoryService>();
+            builder.Services.AddScoped<ICollectionService, CollectionService>();
 
             var app = builder.Build();
 
