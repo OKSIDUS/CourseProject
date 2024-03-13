@@ -18,7 +18,7 @@ namespace UserCollection.Services.WebAPI
             {
                 var json = JsonSerializer.Serialize(collection);
                 var content = new StringContent(json, System.Text.Encoding.UTF8, "application/json");
-                var response = await httpClient.PostAsync("/Collection/Create", content);
+                var response = await httpClient.PostAsync("Collection/Create", content);
             }
         }
 
@@ -32,10 +32,10 @@ namespace UserCollection.Services.WebAPI
             var response = await httpClient.GetAsync("Collection/");
             if (response.IsSuccessStatusCode)
             {
-                var collections = await response.Content.ReadFromJsonAsync<IEnumerable<CollectionCategoryModel>>();
+                var collections = await response.Content.ReadFromJsonAsync<IEnumerable<CollectionModel>>();
                 if (collections is not null)
                 {
-                    return (IEnumerable<CollectionModel>)collections!;
+                    return collections!;
                 }
                 
             }
