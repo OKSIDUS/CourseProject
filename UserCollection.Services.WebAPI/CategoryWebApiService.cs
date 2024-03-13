@@ -61,7 +61,7 @@ namespace UserCollection.Services.WebAPI
         {
             var json = JsonSerializer.Serialize(category);
 
-            var content = new StringContent(json, System.Text.Encoding.UTF8);
+            var content = new StringContent(json, System.Text.Encoding.UTF8, "application/json");
 
             var response = await httpClient.PostAsync($"Category/Update/", content);
         }
