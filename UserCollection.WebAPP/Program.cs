@@ -1,5 +1,7 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using UserCollection.Services.Interfaces;
+using UserCollection.Services.WebAPI;
 using UserCollection.WebAPP.Data;
 
 namespace UserCollection.WebAPP
@@ -19,6 +21,8 @@ namespace UserCollection.WebAPP
             builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
             builder.Services.AddControllersWithViews();
+
+            builder.Services.AddScoped<ICategoryService, CategoryWebApiService>();
 
             var app = builder.Build();
 
@@ -44,7 +48,7 @@ namespace UserCollection.WebAPP
 
             app.MapControllerRoute(
                 name: "default",
-                pattern: "{controller=Home}/{action=Index}/{id?}");
+                pattern: "{controller=Category}/{action=Index}/{id?}");
             app.MapRazorPages();
 
             app.Run();
