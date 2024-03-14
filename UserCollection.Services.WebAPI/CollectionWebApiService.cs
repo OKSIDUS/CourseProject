@@ -9,7 +9,7 @@ namespace UserCollection.Services.WebAPI
     {
         private readonly HttpClient httpClient = new()
         {
-            BaseAddress = new Uri("https://localhost:7292/"),
+            BaseAddress = new Uri("http://userCollectionWebApi.somee.com"),
         };
 
         public async Task AddCollectionAsync(CollectionModel collection)
