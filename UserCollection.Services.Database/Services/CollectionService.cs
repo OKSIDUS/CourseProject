@@ -1,5 +1,7 @@
 ﻿using AutoMapper;
 using Microsoft.EntityFrameworkCore;
+using System.Text.Json.Serialization;
+using System.Text.Json;
 using UserCollection.Services.Database.Entities;
 using UserCollection.Services.Interfaces;
 using UserCollection.WebAPI.Models;
@@ -46,7 +48,7 @@ namespace UserCollection.Services.Database.Services
 
         public async Task<CollectionModel> GetCollectionAsync(int id)
         {
-            var collection = await dbContext.Collections.Where(c => c.Id == id).FirstOrDefaultAsync();
+            var collection = await dbContext.Collections.Include(c => c.Category).Where(c => c.Id == id).FirstOrDefaultAsync();
             return mapper.Map<CollectionModel>(collection);
         }
 

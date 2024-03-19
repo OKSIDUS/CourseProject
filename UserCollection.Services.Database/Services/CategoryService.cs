@@ -45,7 +45,7 @@ namespace UserCollection.Services.Database.Services
 
         public async Task<CollectionCategoryModel> GetCategoryAsync(int id)
         {
-            var category = await dbContext.Categories.Where(c => c.Id == id).FirstOrDefaultAsync();
+            var category = await dbContext.Categories.Include(c=> c.UserCollections).Where(c => c.Id == id).FirstOrDefaultAsync();
             return mapper.Map<CollectionCategoryModel>(category);
         }
 

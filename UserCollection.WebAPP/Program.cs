@@ -23,6 +23,7 @@ namespace UserCollection.WebAPP
             builder.Services.AddControllersWithViews();
 
             builder.Services.AddScoped<ICategoryService, CategoryWebApiService>();
+            builder.Services.AddScoped<ICollectionService, CollectionWebApiService>();
 
             var app = builder.Build();
 
@@ -48,7 +49,7 @@ namespace UserCollection.WebAPP
 
             app.MapControllerRoute(
                 name: "default",
-                pattern: "{controller=Category}/{action=Index}/{id?}");
+                pattern: "{controller=Collection}/{action=Index}/{id?}");
             app.MapRazorPages();
 
             app.Run();

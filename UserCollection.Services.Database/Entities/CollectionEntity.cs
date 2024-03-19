@@ -1,4 +1,5 @@
-﻿using UserCollection.WebAPI.Models;
+﻿using System.Text.Json.Serialization;
+using UserCollection.WebAPI.Models;
 
 namespace UserCollection.Services.Database.Entities
 {
@@ -15,6 +16,7 @@ namespace UserCollection.Services.Database.Entities
         public string UserId { get; set; }
         public ICollection<ItemEntity> Items { get; set; } = new List<ItemEntity>();
 
+        [JsonIgnore]
         public CategoryEntity Category { get; set; } = null!;
 
         public int CategoryId {  get; set; }

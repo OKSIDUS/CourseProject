@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using System.Text.Json.Serialization;
 using UserCollection.Common;
 using UserCollection.Services.Database;
 using UserCollection.Services.Database.Services;
@@ -15,6 +16,9 @@ namespace UserCollection.WebAPI
             // Add services to the container.
 
             builder.Services.AddControllers();
+            builder.Services.AddControllersWithViews().AddNewtonsoftJson(options =>
+    options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
+);
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
@@ -24,6 +28,7 @@ namespace UserCollection.WebAPI
             var connectionString = builder.Configuration.GetConnectionString("Collection") ?? throw new InvalidOperationException("Connection string 'UserCollection' not found.");
             builder.Services.AddDbContext<ApplicationDBContext>(options =>
                 options.UseSqlServer(connectionString));
+
 
             builder.Services.AddScoped<ICategoryService, CategoryService>();
             builder.Services.AddScoped<ICollectionService, CollectionService>();

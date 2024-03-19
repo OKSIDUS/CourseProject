@@ -8,6 +8,8 @@ namespace UserCollection.Services.Database.Entities
 
         public string Name { get; set; }
 
+        public DateTime DateOfCreating { get; set; } = DateTime.Now;
+
         public int CollectionId { get; set; }
         public CollectionEntity Collection { get; set; } = null!;
 
