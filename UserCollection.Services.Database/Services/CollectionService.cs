@@ -42,7 +42,7 @@ namespace UserCollection.Services.Database.Services
 
         public async Task<IEnumerable<CollectionModel>> GetAllCollectionsAsync()
         {
-            var collections = await dbContext.Collections.ToListAsync();
+            var collections = await dbContext.Collections.Include(c => c.Items).ToListAsync();
             return collections.Select(c => mapper.Map<CollectionModel>(c));
         }
 

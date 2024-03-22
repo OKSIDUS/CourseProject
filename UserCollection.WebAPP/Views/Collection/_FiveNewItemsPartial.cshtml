@@ -1,0 +1,51 @@
+﻿@using UserCollection.WebAPI.Models
+@model IEnumerable<UserCollection.WebAPI.Models.CollectionModel>
+
+@{
+    ViewData["Title"] = "_FiveNewItemsPartial";
+    var allItems = new List<ItemModel>();
+    foreach (var collection in Model)
+    {
+        allItems.AddRange(collection.Items);
+    }
+}
+
+<h1>Last added Items</h1>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>
+                Name
+            </th>
+            <th>
+                Author
+            </th>
+            <th>
+                Creating date
+            </th>
+            <th>
+                Collection Name
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in allItems.OrderByDescending(i => i.CreatedDate).Take(10)) {
+            var collection = Model.FirstOrDefault(c => c.Items.Any(i => i.Id == item.Id));
+            <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => collection.UserId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CreatedDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => collection.Name)
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

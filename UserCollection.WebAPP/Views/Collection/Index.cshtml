@@ -1,87 +1,37 @@
-﻿@model IEnumerable<UserCollection.WebAPI.Models.CollectionModel>
+﻿@using UserCollection.WebAPI.Models
+@model IEnumerable<UserCollection.WebAPI.Models.CollectionModel>
 
 @{
     ViewData["Title"] = "Index";
 }
 
 <h1>All Collections</h1>
-
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
 <div class="row">
-    @foreach (var item in Model)
+    @foreach (var item in Model.OrderByDescending(c => c.Items.Count()).Take(5))
     {
         <div class="col-md-4 mb-4">
-            <div class="card">
-                <img src="@item.ImageUrl" class="card-img-top" alt="Collection Image">
-                <div class="card-body">
-                    <h5 class="card-title">@item.Name</h5>
-                    <p class="card-text">@item.Description</p>
-                    <p class="card-text"><strong>User ID:</strong> @item.UserId</p>
-                    <p class="card-text"><strong>Category ID:</strong> @item.CategoryId</p>
-                    <a href="@Url.Action("Details", new { id = item.Id })" class="btn btn-primary">Details</a>
-                    <a href="@Url.Action("Edit", new { id = item.Id })" class="btn btn-secondary">Edit</a>
-                    <a href="@Url.Action("Delete", new { id = item.Id })" class="btn btn-danger">Delete</a>
+            <a href="@Url.Action("Details", new {id = item.Id})" class="card-link text-dark text-decoration-none">
+                <div class="card">
+                    <img src="@item.ImageUrl" class="card-img-top" alt="Collection Image">
+                    <div class="card-body">
+                        <h5 class="card-title">@item.Name</h5>
+                        <p class="card-text">@item.Description</p>
+                        <p class="card-text"><strong>User ID:</strong> @item.UserId</p>
+                        <p class="card-text"><strong>Category ID:</strong> @item.CategoryId</p>
+                        <a href="@Url.Action("Details", new { id = item.Id })" class="btn btn-primary">Details</a>
+                        <a href="@Url.Action("Edit", new { id = item.Id })" class="btn btn-secondary">Edit</a>
+                        <a href="@Url.Action("Delete", new { id = item.Id })" class="btn btn-danger">Delete</a>
+                    </div>
                 </div>
-            </div>
+            </a>
+            
         </div>
     }
-</div>
-<h1>Next 10 Collections</h1>
-
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                Id
-            </th>
-            <th>
-                Name
-            </th>
-            <th>
-                Description
-            </th>
-            <th>
-                ImageUrl
-            </th>
-            <th>
-                UserId
-            </th>
-            <th>
-                CategoryId
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model.Take(10))
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Id)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Name)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Description)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.ImageUrl)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.UserId)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.CategoryId)
-                </td>
-                <td>
-                    @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-                    @Html.ActionLink("Details", "Details", new { id = item.Id }) |
-                    @Html.ActionLink("Delete", "Delete", new { id = item.Id })
-                </td>
-            </tr>
+    <div class="table">
+        @{
+            await Html.RenderPartialAsync("_FiveNewItemsPartial", Model);
         }
-    </tbody>
-</table>
+    </div>
+
+ 
+</div>

@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using UserCollection.Services.Interfaces;
+using UserCollection.WebAPI.Models;
 
 namespace UserCollection.WebAPP.Controllers
 {
@@ -15,7 +16,14 @@ namespace UserCollection.WebAPP.Controllers
         public async Task<IActionResult> Index()
         {
             var collections = await service.GetAllCollectionsAsync();
-           return View(collections);
+            
+            return View(collections);
+        }
+
+        public async Task<IActionResult> Details(int id)
+        {
+            var collection = await service.GetCollectionAsync(id);
+            return View(collection);
         }
     }
 }
