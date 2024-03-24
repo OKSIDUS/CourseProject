@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Humanizer;
+using Microsoft.AspNetCore.Mvc;
 using UserCollection.Services.Interfaces;
 using UserCollection.WebAPI.Models;
 
@@ -31,6 +32,12 @@ namespace UserCollection.WebAPP.Controllers
         {
             var collections = await service.GetUserCollections(userId);
             return View(collections);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Create()
+        {
+            return View();  
         }
     }
 }

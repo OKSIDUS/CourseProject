@@ -18,18 +18,14 @@
                         <p class="card-text">@item.Description</p>
                         <p class="card-text"><strong>User ID:</strong> @item.UserId</p>
                         <p class="card-text"><strong>Category ID:</strong> @item.CategoryId</p>
-                        <a href="@Url.Action("Details", new { id = item.Id })" class="btn btn-primary">Details</a>
-                        <a href="@Url.Action("Edit", new { id = item.Id })" class="btn btn-secondary">Edit</a>
-                        <a href="@Url.Action("Delete", new { id = item.Id })" class="btn btn-danger">Delete</a>
                     </div>
                 </div>
             </a>
-            
         </div>
     }
     <div class="table">
         @{
-            await Html.RenderPartialAsync("_FiveNewItemsPartial", Model);
+            await Html.RenderPartialAsync("_TenNewItemsPartial", Model);
         }
     </div>
 
