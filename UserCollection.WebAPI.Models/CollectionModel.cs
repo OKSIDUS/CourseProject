@@ -15,6 +15,10 @@ namespace UserCollection.WebAPI.Models
 
         public string UserId { get; set; }
 
+        public string UserName { get; set; } = string.Empty;
+
+        public bool IsPrivate { get; set; }
+
         public ICollection<ItemModel> Items { get; set; } = new List<ItemModel>();
 
         public CollectionCategoryModel Category { get; set; } = null!;

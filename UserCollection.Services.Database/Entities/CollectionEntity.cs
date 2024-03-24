@@ -14,6 +14,9 @@ namespace UserCollection.Services.Database.Entities
         public string ImageUrl { get; set; } = string.Empty;
 
         public string UserId { get; set; }
+        public string UserName { get; set; } = string.Empty;
+
+        public bool IsPrivate { get; set; }
         public ICollection<ItemEntity> Items { get; set; } = new List<ItemEntity>();
 
         [JsonIgnore]
