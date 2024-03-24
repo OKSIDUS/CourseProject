@@ -58,6 +58,11 @@ namespace UserCollection.Services.WebAPI
             return new CollectionModel();
         }
 
+        public Task<IEnumerable<CollectionModel>> GetUserCollections(string userId)
+        {
+            throw new NotImplementedException();
+        }
+
         public async Task UpdateCollectionAsync(CollectionModel collection)
         {
             var json = JsonSerializer.Serialize(collection);

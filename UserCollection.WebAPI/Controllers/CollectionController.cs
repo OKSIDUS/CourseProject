@@ -62,5 +62,12 @@ namespace UserCollection.WebAPI.Controllers
             await service.DeleteCollectionAsync(id);
             return Ok();
         }
+
+        [HttpGet("/Collection/user={userId}")]
+        public async Task<IActionResult> GetUserCollections(string userId)
+        {
+            var collections = await service.GetUserCollections(userId);
+            return Ok(collections);
+        }
     }
 }

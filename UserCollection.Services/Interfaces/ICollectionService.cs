@@ -13,5 +13,7 @@ namespace UserCollection.Services.Interfaces
         public Task<IEnumerable<CollectionModel>> GetAllCollectionsAsync();
 
         public Task UpdateCollectionAsync(CollectionModel collection);
+
+        public Task<IEnumerable<CollectionModel>> GetUserCollections(string userId);
     }
 }
