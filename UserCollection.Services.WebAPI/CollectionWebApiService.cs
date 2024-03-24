@@ -58,9 +58,20 @@ namespace UserCollection.Services.WebAPI
             return new CollectionModel();
         }
 
-        public Task<IEnumerable<CollectionModel>> GetUserCollections(string userId)
+        public async Task<IEnumerable<CollectionModel>> GetUserCollections(string userId)
         {
-            throw new NotImplementedException();
+            var response = await httpClient.GetAsync($"Collection/user={userId}");
+            if (response.IsSuccessStatusCode)
+            {
+                var collections = await response.Content.ReadFromJsonAsync<IEnumerable<CollectionModel>>();
+                if (collections is not null)
+                {
+                    return collections!;
+                }
+
+            }
+
+            return new List<CollectionModel>();
         }
 
         public async Task UpdateCollectionAsync(CollectionModel collection)

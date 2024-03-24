@@ -25,5 +25,12 @@ namespace UserCollection.WebAPP.Controllers
             var collection = await service.GetCollectionAsync(id);
             return View(collection);
         }
+
+        
+        public async Task<IActionResult> UserCollections(string userId = "SomeUser")
+        {
+            var collections = await service.GetUserCollections(userId);
+            return View(collections);
+        }
     }
 }
