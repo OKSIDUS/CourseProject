@@ -39,5 +39,18 @@ namespace UserCollection.WebAPP.Controllers
         {
             return View();  
         }
+
+        [HttpPost]
+        public async Task<IActionResult> Create(CollectionModel collection)
+        {
+            if (collection is not null)
+            {
+                
+                await service.AddCollectionAsync(collection);
+                return RedirectToAction("UserCollections");
+            }
+
+            return View();
+        }
     }
 }

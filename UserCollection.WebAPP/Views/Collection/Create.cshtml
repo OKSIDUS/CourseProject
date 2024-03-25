@@ -13,11 +13,6 @@
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="Id" class="control-label"></label>
-                <input asp-for="Id" class="form-control" />
-                <span asp-validation-for="Id" class="text-danger"></span>
-            </div>
-            <div class="form-group">
                 <label asp-for="Name" class="control-label"></label>
                 <input asp-for="Name" class="form-control" />
                 <span asp-validation-for="Name" class="text-danger"></span>
@@ -26,21 +21,6 @@
                 <label asp-for="Description" class="control-label"></label>
                 <input asp-for="Description" class="form-control" />
                 <span asp-validation-for="Description" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="ImageUrl" class="control-label"></label>
-                <input asp-for="ImageUrl" class="form-control" />
-                <span asp-validation-for="ImageUrl" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="UserId" class="control-label"></label>
-                <input asp-for="UserId" class="form-control" />
-                <span asp-validation-for="UserId" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="UserName" class="control-label"></label>
-                <input asp-for="UserName" class="form-control" />
-                <span asp-validation-for="UserName" class="text-danger"></span>
             </div>
             <div class="form-group form-check">
                 <label class="form-check-label">
@@ -52,6 +32,105 @@
                 <input asp-for="CategoryId" class="form-control" />
                 <span asp-validation-for="CategoryId" class="text-danger"></span>
             </div>
+            <div id="customStringFields">
+                <div class="form-group" style="display: none;">
+                    <label asp-for="CustomStringFields.CustomField1Name" class="control-label">String 1</label>
+                    <input asp-for="CustomStringFields.CustomField1Name" class="form-control" />
+                    <span asp-validation-for="CustomStringFields.CustomField1Name" class="text-danger"></span>
+                </div>
+                <div class="form-group" style="display: none;">
+                    <label asp-for="CustomStringFields.CustomField2Name" class="control-label">String 2</label>
+                    <input asp-for="CustomStringFields.CustomField2Name" class="form-control" />
+                    <span asp-validation-for="CustomStringFields.CustomField2Name" class="text-danger"></span>
+                </div>
+                <div class="form-group" style="display: none;">
+                    <label asp-for="CustomStringFields.CustomField3Name" class="control-label">String 3</label>
+                    <input asp-for="CustomStringFields.CustomField3Name" class="form-control" />
+                    <span asp-validation-for="CustomStringFields.CustomField3Name" class="text-danger"></span>
+                </div>
+            </div>
+            <div id="customIntegerFields">
+                <div class="form-group" style="display: none;">
+                    <label asp-for="CustomIntegerFields.CustomField1Name" class="control-label">Integer 1</label>
+                    <input asp-for="CustomIntegerFields.CustomField1Name" class="form-control" />
+                    <span asp-validation-for="CustomIntegerFields.CustomField1Name" class="text-danger"></span>
+                </div>
+                <div class="form-group" style="display: none;">
+                    <label asp-for="CustomIntegerFields.CustomField2Name" class="control-label">Integer 2</label>
+                    <input asp-for="CustomIntegerFields.CustomField2Name" class="form-control" />
+                    <span asp-validation-for="CustomIntegerFields.CustomField2Name" class="text-danger"></span>
+                </div>
+                <div class="form-group" style="display: none;">
+                    <label asp-for="CustomIntegerFields.CustomField3Name" class="control-label">Integer 3</label>
+                    <input asp-for="CustomIntegerFields.CustomField3Name" class="form-control" />
+                    <span asp-validation-for="CustomIntegerFields.CustomField3Name" class="text-danger"></span>
+                </div>
+            </div>
+            <div id="customTextFields">
+                <div class="form-group" style="display: none;">
+                    <label asp-for="CustomTextFields.CustomField1Name" class="control-label">Text 1</label>
+                    <input asp-for="CustomTextFields.CustomField1Name" class="form-control" />
+                    <span asp-validation-for="CustomTextFields.CustomField1Name" class="text-danger"></span>
+                </div>
+                <div class="form-group" style="display: none;">
+                    <label asp-for="CustomTextFields.CustomField2Name" class="control-label">Text 2</label>
+                    <input asp-for="CustomTextFields.CustomField2Name" class="form-control" />
+                    <span asp-validation-for="CustomTextFields.CustomField2Name" class="text-danger"></span>
+                </div>
+                <div class="form-group" style="display: none;">
+                    <label asp-for="CustomTextFields.CustomField3Name" class="control-label">Text 3</label>
+                    <input asp-for="CustomTextFields.CustomField3Name" class="form-control" />
+                    <span asp-validation-for="CustomTextFields.CustomField3Name" class="text-danger"></span>
+                </div>
+            </div>
+            <div id="customDateTimeFields">
+                <div class="form-group" style="display: none;">
+                    <label asp-for="CustomDateTimeFields.CustomField1Name" class="control-label">DateTime 1</label>
+                    <input asp-for="CustomDateTimeFields.CustomField1Name" class="form-control" />
+                    <span asp-validation-for="CustomDateTimeFields.CustomField1Name" class="text-danger"></span>
+                </div>
+                <div class="form-group" style="display: none;">
+                    <label asp-for="CustomDateTimeFields.CustomField2Name" class="control-label">DateTime 2</label>
+                    <input asp-for="CustomDateTimeFields.CustomField2Name" class="form-control" />
+                    <span asp-validation-for="CustomDateTimeFields.CustomField2Name" class="text-danger"></span>
+                </div>
+                <div class="form-group" style="display: none;">
+                    <label asp-for="CustomDateTimeFields.CustomField3Name" class="control-label">DateTime 3</label>
+                    <input asp-for="CustomDateTimeFields.CustomField3Name" class="form-control" />
+                    <span asp-validation-for="CustomDateTimeFields.CustomField3Name" class="text-danger"></span>
+                </div>
+            </div>
+            <div id="customBoolFields">
+                <div class="form-group" style="display: none;">
+                    <label asp-for="CustomBoolFields.CustomField1Name" class="control-label">Bool 1</label>
+                    <input asp-for="CustomBoolFields.CustomField1Name" class="form-control" />
+                    <span asp-validation-for="CustomBoolFields.CustomField1Name" class="text-danger"></span>
+                </div>
+                <div class="form-group" style="display: none;">
+                    <label asp-for="CustomBoolFields.CustomField2Name" class="control-label">Bool 2</label>
+                    <input asp-for="CustomBoolFields.CustomField2Name" class="form-control" />
+                    <span asp-validation-for="CustomBoolFields.CustomField2Name" class="text-danger"></span>
+                </div>
+                <div class="form-group" style="display: none;">
+                    <label asp-for="CustomBoolFields.CustomField3Name" class="control-label">Bool 3</label>
+                    <input asp-for="CustomBoolFields.CustomField3Name" class="form-control" />
+                    <span asp-validation-for="CustomBoolFields.CustomField3Name" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="newFieldType" class="control-label">New Field Type</label>
+                <select id="newFieldType" class="form-control">
+                    <option value="">-- Select Field Type --</option>
+                    <option value="String">String</option>
+                    <option value="Integer">Integer</option>
+                    <option value="Text">Text</option>
+                    <option value="DateTime">DateTime</option>
+                    <option value="Bool">Bool</option>
+                </select>
+                <button type="button" class="btn btn-primary ml-2" onclick="showNextField()">Add Custom Field</button>
+            </div>
+
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>

@@ -14,7 +14,7 @@ namespace UserCollection.Common
                 .ForMember(dest => dest.CustomBoolFields, opt => opt.MapFrom(src => MapCustomFieldsModel(src.CustomBoolField1State, src.CustomBoolField1Name, src.CustomBoolField2State, src.CustomBoolField2Name, src.CustomBoolField3State, src.CustomBoolField3Name)))
                 .ForMember(dest => dest.CustomTextFields, opt => opt.MapFrom(src => MapCustomFieldsModel(src.CustomTextField1State, src.CustomTextField1Name, src.CustomTextField2State, src.CustomTextField2Name, src.CustomTextField3State, src.CustomTextField3Name)))
                 .ForMember(dest => dest.CustomStringFields, opt => opt.MapFrom(src => MapCustomFieldsModel(src.CustomStringField1State, src.CustomStringField1Name, src.CustomStringField2State, src.CustomStringField2Name, src.CustomStringField3State, src.CustomStringField3Name)))
-                .ForMember(dest => dest.CustomIntFields, opt => opt.MapFrom(src => MapCustomFieldsModel(src.CustomIntField1State, src.CustomIntField1Name, src.CustomIntField2State, src.CustomIntField2Name, src.CustomIntField3State, src.CustomIntField3Name)));
+                .ForMember(dest => dest.CustomIntegerFields, opt => opt.MapFrom(src => MapCustomFieldsModel(src.CustomIntField1State, src.CustomIntField1Name, src.CustomIntField2State, src.CustomIntField2Name, src.CustomIntField3State, src.CustomIntField3Name)));
 
 
             this.CreateMap<CollectionModel, CollectionEntity>()
@@ -46,12 +46,12 @@ namespace UserCollection.Common
                 .ForMember(dest => dest.CustomTextField3Name, opt => opt.MapFrom(src => src.CustomTextFields.CustomField3Name))
                 .ForMember(dest => dest.CustomTextField3State, opt => opt.MapFrom(src => src.CustomTextFields.CustomField3State))
                 .ForMember(dest => dest.Category, opt => opt.MapFrom(src => src.Category))
-                .ForMember(dest => dest.CustomIntField1Name, opt => opt.MapFrom(src => src.CustomIntFields.CustomField1Name))
-                .ForMember(dest => dest.CustomIntField1State, opt => opt.MapFrom(src => src.CustomIntFields.CustomField1State))
-                .ForMember(dest => dest.CustomIntField2Name, opt => opt.MapFrom(src => src.CustomIntFields.CustomField2Name))
-                .ForMember(dest => dest.CustomIntField2State, opt => opt.MapFrom(src => src.CustomIntFields.CustomField2State))
-                .ForMember(dest => dest.CustomIntField3Name, opt => opt.MapFrom(src => src.CustomIntFields.CustomField3Name))
-                .ForMember(dest => dest.CustomIntField3State, opt => opt.MapFrom(src => src.CustomIntFields.CustomField3State));
+                .ForMember(dest => dest.CustomIntField1Name, opt => opt.MapFrom(src => src.CustomIntegerFields.CustomField1Name))
+                .ForMember(dest => dest.CustomIntField1State, opt => opt.MapFrom(src => src.CustomIntegerFields.CustomField1State))
+                .ForMember(dest => dest.CustomIntField2Name, opt => opt.MapFrom(src => src.CustomIntegerFields.CustomField2Name))
+                .ForMember(dest => dest.CustomIntField2State, opt => opt.MapFrom(src => src.CustomIntegerFields.CustomField2State))
+                .ForMember(dest => dest.CustomIntField3Name, opt => opt.MapFrom(src => src.CustomIntegerFields.CustomField3Name))
+                .ForMember(dest => dest.CustomIntField3State, opt => opt.MapFrom(src => src.CustomIntegerFields.CustomField3State));
 
             this.CreateMap<CategoryEntity, CollectionCategoryModel>().ReverseMap();
 

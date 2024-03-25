@@ -27,7 +27,7 @@ namespace UserCollection.WebAPI.Models
 
         public CustomFieldsModel CustomStringFields { get; set; } = new CustomFieldsModel();
 
-        public CustomFieldsModel CustomIntFields { get; set; } = new CustomFieldsModel();
+        public CustomFieldsModel CustomIntegerFields { get; set; } = new CustomFieldsModel();
 
         public CustomFieldsModel CustomTextFields { get; set; } = new CustomFieldsModel();
         
