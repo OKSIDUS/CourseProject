@@ -23,6 +23,7 @@ namespace UserCollection.Services.Database.Services
         {
             if (collection is not null)
             {
+                collection = CheckCustomField(collection);
                 var collectionEntity = mapper.Map<CollectionEntity>(collection);
                 await dbContext.Collections.AddAsync(collectionEntity);
                 await dbContext.SaveChangesAsync();
@@ -67,6 +68,27 @@ namespace UserCollection.Services.Database.Services
                 dbContext.Collections.Update(collectionEntity);
                 await dbContext.SaveChangesAsync();
             }
+        }
+
+
+        private CollectionModel CheckCustomField(CollectionModel collection)
+        {
+            collection.CustomBoolFields = NoteCustomFields(collection.CustomBoolFields);
+            collection.CustomTextFields = NoteCustomFields(collection.CustomTextFields);
+            collection.CustomDateTimeFields = NoteCustomFields(collection.CustomDateTimeFields);
+            collection.CustomStringFields = NoteCustomFields(collection.CustomStringFields);
+            collection.CustomIntegerFields = NoteCustomFields(collection.CustomIntegerFields);
+
+            return collection;
+        }
+
+        private CustomFieldsModel NoteCustomFields(CustomFieldsModel customFields)
+        {
+            customFields.CustomField1State = customFields.CustomField1Name != string.Empty;
+            customFields.CustomField2State = customFields.CustomField2Name != string.Empty;
+            customFields.CustomField3State = customFields.CustomField3Name != string.Empty;
+
+            return customFields;
         }
     }
 }

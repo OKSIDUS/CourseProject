@@ -1,4 +1,5 @@
 ﻿using Humanizer;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using UserCollection.Services.Interfaces;
 using UserCollection.WebAPI.Models;
@@ -8,10 +9,12 @@ namespace UserCollection.WebAPP.Controllers
     public class CollectionController : Controller
     {
         private readonly ICollectionService service;
+        private readonly UserManager<IdentityUser> userManager;
 
-        public CollectionController(ICollectionService service)
+        public CollectionController(ICollectionService service, UserManager<IdentityUser> userManager)
         {
             this.service = service;
+            this.userManager = userManager;
         }
 
         public async Task<IActionResult> Index()
@@ -45,7 +48,9 @@ namespace UserCollection.WebAPP.Controllers
         {
             if (collection is not null)
             {
-                
+                var user = await userManager.GetUserAsync(User);
+                collection.UserName = user.UserName;
+                collection.UserId = user.Id;
                 await service.AddCollectionAsync(collection);
                 return RedirectToAction("UserCollections");
             }
