@@ -26,7 +26,7 @@ namespace UserCollection.WebAPI.Controllers
         }
 
         [HttpPost("/Collection/Create")]
-        public async Task<IActionResult> CreateCollection(CollectionModel collection)
+        public async Task<IActionResult> CreateCollection([FromBody] CollectionModel collection)
         {
             if (collection is null)
             {

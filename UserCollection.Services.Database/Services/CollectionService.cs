@@ -84,9 +84,15 @@ namespace UserCollection.Services.Database.Services
 
         private CustomFieldsModel NoteCustomFields(CustomFieldsModel customFields)
         {
-            customFields.CustomField1State = customFields.CustomField1Name != string.Empty;
-            customFields.CustomField2State = customFields.CustomField2Name != string.Empty;
-            customFields.CustomField3State = customFields.CustomField3Name != string.Empty;
+
+            customFields.CustomField1State = !string.IsNullOrEmpty(customFields.CustomField1Name);
+            customFields.CustomField1Name = customFields.CustomField1State  ? customFields.CustomField1Name : string.Empty;
+
+            customFields.CustomField2State = !string.IsNullOrEmpty(customFields.CustomField2Name);
+            customFields.CustomField2Name = customFields.CustomField2State ? customFields.CustomField2Name : string.Empty;
+
+            customFields.CustomField3State = !string.IsNullOrEmpty(customFields.CustomField3Name);
+            customFields.CustomField3Name = customFields.CustomField3State ? customFields.CustomField3Name : string.Empty;
 
             return customFields;
         }

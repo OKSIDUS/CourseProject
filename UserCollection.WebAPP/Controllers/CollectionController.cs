@@ -31,10 +31,17 @@ namespace UserCollection.WebAPP.Controllers
         }
 
         
-        public async Task<IActionResult> UserCollections(string userId = "SomeUser")
+        public async Task<IActionResult> UserCollections()
         {
-            var collections = await service.GetUserCollections(userId);
+            var user = await userManager.GetUserAsync(User);
+            var collections = await service.GetUserCollections(user.Id);
             return View(collections);
+        }
+
+        public async Task<IActionResult> UserCollection(int id)
+        {
+            var collection = await service.GetCollectionAsync(id);
+            return View(collection);
         }
 
         [HttpGet]
