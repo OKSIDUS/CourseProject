@@ -1,7 +1,9 @@
-﻿using UserCollection.WebAPI.Models;
+﻿using Microsoft.EntityFrameworkCore;
+using UserCollection.WebAPI.Models;
 
 namespace UserCollection.Services.Database.Entities
 {
+    [Index(nameof(Name))]
     public class ItemEntity
     {
         public int Id { get; set; }

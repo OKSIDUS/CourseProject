@@ -37,6 +37,14 @@ namespace UserCollection.Services.Database.Services
             }
         }
 
+        public async Task<IEnumerable<ItemModel>> FullTextSearch(string query)
+        {
+            var collections = await dbContext.Items
+                .Where(x => EF.Functions.Contains(x.Name, query)).ToListAsync();
+
+            return collections.Select(i => mapper.Map<ItemModel>(i));
+        }
+
         public async Task<IEnumerable<ItemModel>> GetAllAsync()
         {
             var items = await dbContext.Items.ToListAsync();

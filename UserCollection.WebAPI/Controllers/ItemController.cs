@@ -62,5 +62,12 @@ namespace UserCollection.WebAPI.Controllers
             await service.DeleteItemAsync(id);
             return Ok();
         }
+
+        [HttpGet("/Item/Search={query}")]
+        public async Task<IActionResult> SearchItems(string query)
+        {
+            var collections = await service.FullTextSearch(query);
+            return Ok(collections);
+        }
     }
 }

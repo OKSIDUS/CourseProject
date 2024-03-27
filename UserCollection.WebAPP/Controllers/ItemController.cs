@@ -12,9 +12,10 @@ namespace UserCollection.WebAPP.Controllers
             this.service = service;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> CollectionItems(int id)
         {
-            return View();
+            var items = await service.GetAllAsync();
+            return View(items);
         }
     }
 }
