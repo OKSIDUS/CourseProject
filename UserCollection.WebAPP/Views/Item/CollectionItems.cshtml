@@ -7,7 +7,7 @@
 <h1>CollectionItems</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="CreateItem">Create New</a>
 </p>
 <table class="table">
     <thead>
@@ -44,7 +44,7 @@
             </td>
             <td>
                 @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Details", "ItemDetails", new {  id=item.Id }) |
                 @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
             </td>
         </tr>

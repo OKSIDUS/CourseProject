@@ -64,5 +64,12 @@ namespace UserCollection.WebAPP.Controllers
 
             return View();
         }
+
+        [HttpGet]
+        public async Task<IActionResult> AllCollections()
+        {
+            var collections = await service.GetAllCollectionsAsync();
+            return View(collections);
+        }
     }
 }
