@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.EntityFrameworkCore;
 using UserCollection.Services.Interfaces;
 using UserCollection.Services.WebAPI;
@@ -18,14 +19,22 @@ namespace UserCollection.WebAPP
                 options.UseSqlServer(connectionString));
             builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
-            builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
-                .AddEntityFrameworkStores<ApplicationDbContext>();
+            builder.Services.AddIdentity<IdentityUser, IdentityRole>()
+                .AddEntityFrameworkStores<ApplicationDbContext>()
+                .AddDefaultUI();
+
+            builder.Services.AddAuthorization(options =>
+            {
+                options.AddPolicy("AdminRole", policy => policy.RequireRole("admin"));
+            });
+
             builder.Services.AddControllersWithViews();
 
             builder.Services.AddScoped<ICategoryService, CategoryWebApiService>();
             builder.Services.AddScoped<ICollectionService, CollectionWebApiService>();
             builder.Services.AddScoped<ICollectionItemService, ItemWebApiService>();
 
+            builder.Services.AddRazorPages();
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
@@ -48,6 +57,7 @@ namespace UserCollection.WebAPP
             app.UseAuthentication();
             app.UseAuthorization();
 
+            
             app.MapControllerRoute(
                 name: "default",
                 pattern: "{controller=Collection}/{action=Index}/{id?}");

@@ -1,4 +1,5 @@
 ﻿using Humanizer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -78,6 +79,7 @@ namespace UserCollection.WebAPP.Controllers
             return View();
         }
 
+        [Authorize(Policy = "AdminRole")]
         [HttpGet]
         public async Task<IActionResult> AllCollections()
         {
