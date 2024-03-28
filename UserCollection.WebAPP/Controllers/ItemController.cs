@@ -50,5 +50,25 @@ namespace UserCollection.WebAPP.Controllers
 
             return View();
         }
+
+        [HttpGet]
+        public async Task<IActionResult> ItemEdit(int id)
+        {
+            ViewBag.ItemId = id;
+            var item = await service.GetItemByIdAsync(id);
+            return View(item);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> ItemEdit(ItemModel item)
+        {
+            if (item is not null)
+            {
+                await service.UpdateItemAsync(item);
+                return RedirectToAction("CollectionItems", new { id = item.CollectionId });
+            }
+
+            return View();
+        }
     }
 }

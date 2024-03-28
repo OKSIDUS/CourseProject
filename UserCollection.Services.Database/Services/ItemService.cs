@@ -59,7 +59,7 @@ namespace UserCollection.Services.Database.Services
 
         public async Task<ItemModel> GetItemByIdAsync(int id)
         {
-            var item = await dbContext.Items.Where(i => i.Id == id).FirstOrDefaultAsync();
+            var item = await dbContext.Items.Include(i => i.Collection).Where(i => i.Id == id).FirstOrDefaultAsync();
             return mapper.Map<ItemModel>(item);
         }
 

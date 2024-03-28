@@ -1,0 +1,155 @@
+﻿@model UserCollection.WebAPI.Models.ItemModel
+
+@{
+    ViewData["Title"] = "ItemEdit";
+}
+
+<h1>ItemEdit</h1>
+
+<h4>ItemModel</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="ItemEdit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="@Model.Id" value="@Model.Id" />
+            <input type="hidden" asp-for="@Model.CreatedDate" value="@Model.CreatedDate" />
+            <input type="hidden" asp-for="@Model.CollectionId" value="@Model.CollectionId" />
+            <div class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            @if (Model.Collection.CustomStringFields.CustomField1State)
+            {
+                <div class="form-group">
+                    <label asp-for="@Model.CustomStringFieldData.CustomField1Data" class="control-label">@Model.Collection.CustomStringFields.CustomField1Name</label>
+                    <input asp-for="@Model.CustomStringFieldData.CustomField1Data" class="form-control" />
+                    <span asp-validation-for="@Model.CustomStringFieldData.CustomField1Data" class="text-danger"></span>
+                </div>
+            }
+            @if (Model.Collection.CustomStringFields.CustomField2State)
+            {
+                <div class="form-group">
+                    <label asp-for="@Model.CustomStringFieldData.CustomField2Data" class="control-label">@Model.Collection.CustomStringFields.CustomField2Name</label>
+                    <input asp-for="@Model.CustomStringFieldData.CustomField2Data" class="form-control" />
+                    <span asp-validation-for="@Model.CustomStringFieldData.CustomField2Data" class="text-danger"></span>
+                </div>
+            }
+            @if (Model.Collection.CustomStringFields.CustomField3State)
+            {
+                <div class="form-group">
+                    <label asp-for="@Model.CustomStringFieldData.CustomField3Data" class="control-label">@Model.Collection.CustomStringFields.CustomField3Name</label>
+                    <input asp-for="@Model.CustomStringFieldData.CustomField3Data" class="form-control" />
+                    <span asp-validation-for="@Model.CustomStringFieldData.CustomField3Data" class="text-danger"></span>
+                </div>
+            }
+            @if (Model.Collection.CustomTextFields.CustomField1State)
+            {
+                <div class="form-group">
+                    <label asp-for="@Model.CustomTextFieldData.CustomField1Data" class="control-label">@Model.Collection.CustomTextFields.CustomField1Name</label>
+                    <input asp-for="@Model.CustomTextFieldData.CustomField1Data" class="form-control" />
+                    <span asp-validation-for="@Model.CustomTextFieldData.CustomField1Data" class="text-danger"></span>
+                </div>
+            }
+            @if (Model.Collection.CustomTextFields.CustomField2State)
+            {
+                <div class="form-group">
+                    <label asp-for="@Model.CustomTextFieldData.CustomField2Data" class="control-label">@Model.Collection.CustomTextFields.CustomField2Name</label>
+                    <input asp-for="@Model.CustomTextFieldData.CustomField2Data" class="form-control" />
+                    <span asp-validation-for="@Model.CustomTextFieldData.CustomField2Data" class="text-danger"></span>
+                </div>
+            }
+            @if (Model.Collection.CustomTextFields.CustomField3State)
+            {
+                <div class="form-group">
+                    <label asp-for="@Model.CustomTextFieldData.CustomField3Data" class="control-label">@Model.Collection.CustomTextFields.CustomField3Name</label>
+                    <input asp-for="@Model.CustomTextFieldData.CustomField3Data" class="form-control" />
+                    <span asp-validation-for="@Model.CustomTextFieldData.CustomField3Data" class="text-danger"></span>
+                </div>
+            }
+            @if (Model.Collection.CustomIntegerFields.CustomField1State)
+            {
+                <div class="form-group">
+                    <label asp-for="@Model.CustomIntFieldData.CustomField1Data" class="control-label">@Model.Collection.CustomIntegerFields.CustomField1Name</label>
+                    <input asp-for="@Model.CustomIntFieldData.CustomField1Data" class="form-control" />
+                    <span asp-validation-for="@Model.CustomIntFieldData.CustomField1Data" class="text-danger"></span>
+                </div>
+            }
+            @if (Model.Collection.CustomIntegerFields.CustomField2State)
+            {
+                <div class="form-group">
+                    <label asp-for="@Model.CustomIntFieldData.CustomField2Data" class="control-label">@Model.Collection.CustomIntegerFields.CustomField2Name</label>
+                    <input asp-for="@Model.CustomIntFieldData.CustomField2Data" class="form-control" />
+                    <span asp-validation-for="@Model.CustomIntFieldData.CustomField2Data" class="text-danger"></span>
+                </div>
+            }
+            @if (Model.Collection.CustomIntegerFields.CustomField3State)
+            {
+                <div class="form-group">
+                    <label asp-for="@Model.CustomIntFieldData.CustomField3Data" class="control-label">@Model.Collection.CustomIntegerFields.CustomField3Name</label>
+                    <input asp-for="@Model.CustomIntFieldData.CustomField3Data" class="form-control" />
+                    <span asp-validation-for="@Model.CustomIntFieldData.CustomField3Data" class="text-danger"></span>
+                </div>
+            }
+
+            @if (Model.Collection.CustomDateTimeFields.CustomField1State)
+            {
+                <div class="form-group">
+                    <label asp-for="@Model.CustomDateTimeFieldData.CustomField1Data" class="control-label">@Model.Collection.CustomDateTimeFields.CustomField1Name</label>
+                    <input asp-for="@Model.CustomDateTimeFieldData.CustomField1Data" class="form-control" />
+                    <span asp-validation-for="@Model.CustomDateTimeFieldData.CustomField1Data" class="text-danger"></span>
+                </div>
+            }
+            @if (Model.Collection.CustomDateTimeFields.CustomField2State)
+            {
+                <div class="form-group">
+                    <label asp-for="@Model.CustomDateTimeFieldData.CustomField2Data" class="control-label">@Model.Collection.CustomDateTimeFields.CustomField2Name</label>
+                    <input asp-for="@Model.CustomDateTimeFieldData.CustomField2Data" class="form-control" />
+                    <span asp-validation-for="@Model.CustomDateTimeFieldData.CustomField2Data" class="text-danger"></span>
+                </div>
+            }
+            @if (Model.Collection.CustomDateTimeFields.CustomField3State)
+            {
+                <div class="form-group">
+                    <label asp-for="@Model.CustomDateTimeFieldData.CustomField3Data" class="control-label">@Model.Collection.CustomDateTimeFields.CustomField3Name</label>
+                    <input asp-for="@Model.CustomDateTimeFieldData.CustomField3Data" class="form-control" />
+                    <span asp-validation-for="@Model.CustomDateTimeFieldData.CustomField3Data" class="text-danger"></span>
+                </div>
+            }
+            @if (Model.Collection.CustomBoolFields.CustomField1State)
+            {
+                <div class="form-group">
+                    <label asp-for="@Model.CustomBoolFieldData.CustomField1Data" class="control-label">@Model.Collection.CustomBoolFields.CustomField1Name</label>
+                    <input asp-for="@Model.CustomBoolFieldData.CustomField1Data" class="form-control" />
+                    <span asp-validation-for="@Model.CustomBoolFieldData.CustomField1Data" class="text-danger"></span>
+                </div>
+            }
+            @if (Model.Collection.CustomBoolFields.CustomField2State)
+            {
+                <div class="form-group">
+                    <label asp-for="@Model.CustomBoolFieldData.CustomField2Data" class="control-label">@Model.Collection.CustomBoolFields.CustomField2Name</label>
+                    <input asp-for="@Model.CustomBoolFieldData.CustomField2Data" class="form-control" />
+                    <span asp-validation-for="@Model.CustomBoolFieldData.CustomField2Data" class="text-danger"></span>
+                </div>
+            }
+            @if (Model.Collection.CustomBoolFields.CustomField3State)
+            {
+                <div class="form-group">
+                    <label asp-for="@Model.CustomBoolFieldData.CustomField3Data" class="control-label">@Model.Collection.CustomBoolFields.CustomField3Name</label>
+                    <input asp-for="@Model.CustomBoolFieldData.CustomField3Data" class="form-control" />
+                    <span asp-validation-for="@Model.CustomBoolFieldData.CustomField3Data" class="text-danger"></span>
+                </div>
+            }
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
