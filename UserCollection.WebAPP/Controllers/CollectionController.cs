@@ -1,6 +1,8 @@
 ﻿using Humanizer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.AspNetCore.Mvc.ViewComponents;
 using UserCollection.Services.Interfaces;
 using UserCollection.WebAPI.Models;
 
@@ -10,11 +12,13 @@ namespace UserCollection.WebAPP.Controllers
     {
         private readonly ICollectionService service;
         private readonly UserManager<IdentityUser> userManager;
+        private readonly ICategoryService categoryService;
 
-        public CollectionController(ICollectionService service, UserManager<IdentityUser> userManager)
+        public CollectionController(ICollectionService service, UserManager<IdentityUser> userManager, ICategoryService categoryService)
         {
             this.service = service;
             this.userManager = userManager;
+            this.categoryService = categoryService;
         }
 
         public async Task<IActionResult> Index()
@@ -47,6 +51,15 @@ namespace UserCollection.WebAPP.Controllers
         [HttpGet]
         public async Task<IActionResult> Create()
         {
+            var categories = await categoryService.GetAllCategoriesAsync();
+
+            var selectListItems = categories.Select(c => new SelectListItem
+            {
+                Value = c.Id.ToString(),
+                Text = c.Name
+            }).ToList();
+
+            ViewBag.SelectListItems = selectListItems;
             return View();  
         }
 
