@@ -34,6 +34,143 @@
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.CollectionId)
         </dd>
+
+        @if (Model.Collection.CustomStringFields.CustomField1State)
+        {
+            <dt class="col-sm-2">
+                @Model.Collection.CustomStringFields.CustomField1Name
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.CustomStringFieldData.CustomField1Data)
+            </dd>
+        }
+        @if (Model.Collection.CustomStringFields.CustomField2State)
+        {
+            <dt class="col-sm-2">
+                @Model.Collection.CustomStringFields.CustomField2Name
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.CustomStringFieldData.CustomField2Data)
+            </dd>
+        }
+        @if (Model.Collection.CustomStringFields.CustomField3State)
+        {
+            <dt class="col-sm-2">
+                @Model.Collection.CustomStringFields.CustomField3Name
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.CustomStringFieldData.CustomField3Data)
+            </dd>
+        }
+        @if (Model.Collection.CustomTextFields.CustomField1State)
+        {
+            <dt class="col-sm-2">
+                @Model.Collection.CustomTextFields.CustomField1Name
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.CustomTextFieldData.CustomField1Data)
+            </dd>
+        }
+        @if (Model.Collection.CustomTextFields.CustomField2State)
+        {
+            <dt class="col-sm-2">
+                @Model.Collection.CustomTextFields.CustomField2Name
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.CustomTextFieldData.CustomField2Data)
+            </dd>
+        }
+        @if (Model.Collection.CustomTextFields.CustomField3State)
+        {
+            <dt class="col-sm-2">
+                @Model.Collection.CustomTextFields.CustomField3Name
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.CustomTextFieldData.CustomField3Data)
+            </dd>
+        }
+        @if (Model.Collection.CustomIntegerFields.CustomField1State)
+        {
+            <dt class="col-sm-2">
+                @Model.Collection.CustomIntegerFields.CustomField1Name
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.CustomIntFieldData.CustomField1Data)
+            </dd>
+        }
+        @if (Model.Collection.CustomIntegerFields.CustomField2State)
+        {
+            <dt class="col-sm-2">
+                @Model.Collection.CustomIntegerFields.CustomField2Name
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.CustomIntFieldData.CustomField2Data)
+            </dd>
+        }
+        @if (Model.Collection.CustomIntegerFields.CustomField3State)
+        {
+            <dt class="col-sm-2">
+                @Model.Collection.CustomIntegerFields.CustomField3Name
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.CustomIntFieldData.CustomField3Data)
+            </dd>
+        }
+
+        @if (Model.Collection.CustomDateTimeFields.CustomField1State)
+        {
+            <dt class="col-sm-2">
+                @Model.Collection.CustomDateTimeFields.CustomField1Name
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.CustomDateTimeFieldData.CustomField1Data)
+            </dd>
+        }
+        @if (Model.Collection.CustomDateTimeFields.CustomField2State)
+        {
+            <dt class="col-sm-2">
+                @Model.Collection.CustomDateTimeFields.CustomField2Name
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.CustomDateTimeFieldData.CustomField3Data)
+            </dd>
+        }
+        @if (Model.Collection.CustomDateTimeFields.CustomField3State)
+        {
+            <dt class="col-sm-2">
+                @Model.Collection.CustomDateTimeFields.CustomField3Name
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.CustomDateTimeFieldData.CustomField3Data)
+            </dd>
+        }
+        @if (Model.Collection.CustomBoolFields.CustomField1State)
+        {
+            <dt class="col-sm-2">
+                @Model.Collection.CustomBoolFields.CustomField1Name
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.CustomBoolFieldData.CustomField1Data)
+            </dd>
+        }
+        @if (Model.Collection.CustomBoolFields.CustomField2State)
+        {
+            <dt class="col-sm-2">
+                @Model.Collection.CustomBoolFields.CustomField2Name
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.CustomBoolFieldData.CustomField2Data)
+            </dd>
+        }
+        @if (Model.Collection.CustomBoolFields.CustomField3State)
+        {
+            <dt class="col-sm-2">
+                @Model.Collection.CustomBoolFields.CustomField3Name
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.CustomBoolFieldData.CustomField3Data)
+            </dd>
+        }
     </dl>
 </div>
 <div>
