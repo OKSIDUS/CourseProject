@@ -45,7 +45,7 @@ namespace UserCollection.WebAPI.Controllers
         }
 
         [HttpPost("/Collection/Update")]
-        public async Task<IActionResult> UpdateCollection(CollectionModel collection)
+        public async Task<IActionResult> UpdateCollection([FromBody] CollectionModel collection)
         {
             if (collection is null)
             {

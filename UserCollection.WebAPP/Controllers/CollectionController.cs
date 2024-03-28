@@ -84,5 +84,34 @@ namespace UserCollection.WebAPP.Controllers
             var collections = await service.GetAllCollectionsAsync();
             return View(collections);
         }
+
+        [HttpGet]
+        public async Task<IActionResult> Edit(int id)
+        {
+            var categories = await categoryService.GetAllCategoriesAsync();
+
+            var selectListItems = categories.Select(c => new SelectListItem
+            {
+                Value = c.Id.ToString(),
+                Text = c.Name
+            }).ToList();
+
+            ViewBag.SelectListItems = selectListItems; 
+
+            var collection = await service.GetCollectionAsync(id);
+            return View(collection);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Edit(CollectionModel collection)
+        {
+            if (collection is not null)
+            {
+                await service.UpdateCollectionAsync(collection);
+                return RedirectToAction("Index");
+            }
+
+            return View();
+        }
     }
 }
