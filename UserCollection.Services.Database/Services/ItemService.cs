@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Microsoft.EntityFrameworkCore;
+using System.Linq;
 using UserCollection.Services.Database.Entities;
 using UserCollection.Services.Interfaces;
 using UserCollection.WebAPI.Models;
@@ -39,10 +40,19 @@ namespace UserCollection.Services.Database.Services
 
         public async Task<IEnumerable<ItemModel>> FullTextSearch(string query)
         {
-            var collections = await dbContext.Items
+            var items = await dbContext.Items
                 .Where(x => EF.Functions.Contains(x.Name, query)).ToListAsync();
 
-            return collections.Select(i => mapper.Map<ItemModel>(i));
+            //var collectionIds = collections.Select(i => i.CollectionId).ToList();
+
+            var collections = await dbContext.Items.Include(i => i.Collection)
+                .Where(c => EF.Functions.Contains(c.Collection.Name, query) ||
+                            EF.Functions.Contains(c.Collection.Description, query) ||
+                            EF.Functions.Contains(c.Collection.UserName, query))
+                .ToListAsync();
+
+            items.AddRange(collections);
+            return items.Select(i => mapper.Map<ItemModel>(i));
         }
 
         public async Task<IEnumerable<ItemModel>> GetAllAsync()

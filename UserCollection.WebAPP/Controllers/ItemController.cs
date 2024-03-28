@@ -36,6 +36,13 @@ namespace UserCollection.WebAPP.Controllers
             return View();
         }
 
+        [HttpGet]
+        public async Task<IActionResult> SearchResult(string query)
+        {
+            var items = await service.FullTextSearch(query);
+            return View(items);
+        }
+
         [HttpPost]
         public async Task<IActionResult> CreateItem(ItemModel item)
         {

@@ -28,9 +28,20 @@ namespace UserCollection.Services.WebAPI
             var response = await httpClient.DeleteAsync($"Item/Delete/{id}");
         }
 
-        public Task<IEnumerable<ItemModel>> FullTextSearch(string query)
+        public async Task<IEnumerable<ItemModel>> FullTextSearch(string query)
         {
-            throw new NotImplementedException();
+            var response = await httpClient.GetAsync($"/Item/Search={query}");
+            if (response.IsSuccessStatusCode)
+            {
+                var items = await response.Content.ReadFromJsonAsync<IEnumerable<ItemModel>>();
+                if (items is not null)
+                {
+                    return items!;
+                }
+
+            }
+
+            return new List<ItemModel>();
         }
 
         public async Task<IEnumerable<ItemModel>> GetAllAsync()
