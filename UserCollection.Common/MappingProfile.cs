@@ -56,6 +56,7 @@ namespace UserCollection.Common
             this.CreateMap<CategoryEntity, CollectionCategoryModel>().ReverseMap();
 
             this.CreateMap<ItemEntity, ItemModel>()
+                .ForMember(dest => dest.CreatedDate, opt => opt.MapFrom(src => src.DateOfCreating))
                 .ForMember(dest => dest.CustomDateTimeFieldData, opt => opt.MapFrom(src => new CustomFieldForData<DateTime?>
                 {
                     CustomField1Data = src.CustomDateTimeField1Data,
@@ -88,6 +89,7 @@ namespace UserCollection.Common
                 }));
 
             this.CreateMap<ItemModel, ItemEntity>()
+                .ForMember(dest => dest.DateOfCreating, opt => opt.MapFrom(src => src.CreatedDate))
                 .ForMember(dest => dest.CustomBoolField1Data, opt => opt.MapFrom(src => src.CustomBoolFieldData.CustomField1Data))
                 .ForMember(dest => dest.CustomBoolField2Data, opt => opt.MapFrom(src => src.CustomBoolFieldData.CustomField2Data))
                 .ForMember(dest => dest.CustomBoolField3Data, opt => opt.MapFrom(src => src.CustomBoolFieldData.CustomField3Data))

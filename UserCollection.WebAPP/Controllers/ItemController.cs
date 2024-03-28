@@ -7,15 +7,19 @@ namespace UserCollection.WebAPP.Controllers
     public class ItemController : Controller
     {
         private readonly ICollectionItemService service;
+        private readonly ICollectionService collectionService;
 
-        public ItemController(ICollectionItemService service)
+        public ItemController(ICollectionItemService service, ICollectionService collectionService)
         {
             this.service = service;
+            this.collectionService = collectionService;
         }
 
         public async Task<IActionResult> CollectionItems(int id)
         {
-            var items = await service.GetAllAsync();
+            var collectionId = Request.Query["id"];
+            ViewBag.CollectionId = id;
+            var items = await service.GetAllCollectionItemsAsync(id);
             return View(items);
         }
 
@@ -26,8 +30,9 @@ namespace UserCollection.WebAPP.Controllers
         }
 
         [HttpGet]
-        public IActionResult CreateItem()
+        public async Task<IActionResult> CreateItem(int id)
         {
+            ViewBag.Collection = await collectionService.GetCollectionAsync(id);
             return View();
         }
 
@@ -36,8 +41,11 @@ namespace UserCollection.WebAPP.Controllers
         {
             if (item is not null)
             {
+                
+                ViewBag.CollectionId = item.CollectionId;
+                item.CreatedDate = DateTime.Now;
                 await service.AddItemAsync(item);
-                return RedirectToAction("CollectionItems");
+                return RedirectToAction("CollectionItems", new { id = item.CollectionId });
             }
 
             return View();

@@ -51,6 +51,12 @@ namespace UserCollection.Services.Database.Services
             return items.Select(i => mapper.Map<ItemModel>(i));
         }
 
+        public async Task<IEnumerable<ItemModel>> GetAllCollectionItemsAsync(int id)
+        {
+            var items = await dbContext.Items.Where(i => i.CollectionId == id).ToListAsync();
+            return items.Select(i => mapper.Map<ItemModel>(i));
+        }
+
         public async Task<ItemModel> GetItemByIdAsync(int id)
         {
             var item = await dbContext.Items.Where(i => i.Id == id).FirstOrDefaultAsync();

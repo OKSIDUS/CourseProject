@@ -16,6 +16,8 @@ namespace UserCollection.Services.Interfaces
 
         public Task<IEnumerable<ItemModel>> FullTextSearch(string query);
 
+        public Task<IEnumerable<ItemModel>> GetAllCollectionItemsAsync(int id);
+
 
     }
 }

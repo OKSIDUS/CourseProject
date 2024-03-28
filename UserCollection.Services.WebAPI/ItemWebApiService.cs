@@ -9,7 +9,7 @@ namespace UserCollection.Services.WebAPI
     {
         private readonly HttpClient httpClient = new()
         {
-            BaseAddress = new Uri("http://userCollectionWebApi.somee.com"),
+            BaseAddress = new Uri("https://localhost:7292"),
         };
 
         public async Task AddItemAsync(ItemModel item)
@@ -43,6 +43,18 @@ namespace UserCollection.Services.WebAPI
                     return items!;
                 }
 
+            }
+
+            return new List<ItemModel>();
+        }
+
+        public async Task<IEnumerable<ItemModel>> GetAllCollectionItemsAsync(int id)
+        {
+            var response = await httpClient.GetAsync($"/Item/Collection={id}");
+            if (response.IsSuccessStatusCode)
+            {
+                var items = await response.Content.ReadFromJsonAsync<IEnumerable<ItemModel>>();
+                return items;
             }
 
             return new List<ItemModel>();

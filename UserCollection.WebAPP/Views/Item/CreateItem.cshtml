@@ -1,46 +1,161 @@
-﻿@model UserCollection.WebAPI.Models.ItemModel
+﻿@using UserCollection.WebAPI.Models
+@model UserCollection.WebAPI.Models.ItemModel
 
 @{
     ViewData["Title"] = "CreateItem";
+    CollectionModel collection = ViewBag.Collection ?? new CollectionModel();
+    ItemModel item = new ItemModel();
 }
 
 <h1>CreateItem</h1>
-
+<h2>@collection.Name</h2>
 <h4>ItemModel</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
         <form asp-action="CreateItem">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="@item.CollectionId" value="@collection.Id" />
+            
             <div class="form-group">
-                <label asp-for="Id" class="control-label"></label>
-                <input asp-for="Id" class="form-control" />
-                <span asp-validation-for="Id" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Name" class="control-label"></label>
-                <input asp-for="Name" class="form-control" />
-                <span asp-validation-for="Name" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="CreatedDate" class="control-label"></label>
-                <input asp-for="CreatedDate" class="form-control" />
-                <span asp-validation-for="CreatedDate" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="CollectionId" class="control-label"></label>
-                <input asp-for="CollectionId" class="form-control" />
-                <span asp-validation-for="CollectionId" class="text-danger"></span>
+                <label asp-for="@item.Name" class="control-label"></label>
+                <input asp-for="@item.Name" class="form-control" />
+                <span asp-validation-for="@item.Name" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>
+            @if(collection != null)
+            {
+                @if (collection.CustomStringFields.CustomField1State)
+                {
+                    <div class="form-group">
+                        <label asp-for="@item.CustomStringFieldData.CustomField1Data" class="control-label">@collection.CustomStringFields.CustomField1Name</label>
+                        <input asp-for="@item.CustomStringFieldData.CustomField1Data" class="form-control" />
+                        <span asp-validation-for="@item.CustomStringFieldData.CustomField1Data" class="text-danger"></span>
+                    </div>
+                }
+                @if (collection.CustomStringFields.CustomField2State)
+                {
+                    <div class="form-group">
+                        <label asp-for="@item.CustomStringFieldData.CustomField2Data" class="control-label">@collection.CustomStringFields.CustomField2Name</label>
+                        <input asp-for="@item.CustomStringFieldData.CustomField2Data" class="form-control" />
+                        <span asp-validation-for="@item.CustomStringFieldData.CustomField2Data" class="text-danger"></span>
+                    </div>
+                }
+                @if (collection.CustomStringFields.CustomField3State)
+                {
+                    <div class="form-group">
+                        <label asp-for="@item.CustomStringFieldData.CustomField3Data" class="control-label">@collection.CustomStringFields.CustomField3Name</label>
+                        <input asp-for="@item.CustomStringFieldData.CustomField3Data" class="form-control" />
+                        <span asp-validation-for="@item.CustomStringFieldData.CustomField3Data" class="text-danger"></span>
+                    </div>
+                }
+                @if (collection.CustomTextFields.CustomField1State)
+                {
+                    <div class="form-group">
+                        <label asp-for="@item.CustomTextFieldData.CustomField1Data" class="control-label">@collection.CustomTextFields.CustomField1Name</label>
+                        <input asp-for="@item.CustomTextFieldData.CustomField1Data" class="form-control" />
+                        <span asp-validation-for="@item.CustomTextFieldData.CustomField1Data" class="text-danger"></span>
+                    </div>
+                }
+                @if (collection.CustomTextFields.CustomField2State)
+                {
+                    <div class="form-group">
+                        <label asp-for="@item.CustomTextFieldData.CustomField2Data" class="control-label">@collection.CustomTextFields.CustomField2Name</label>
+                        <input asp-for="@item.CustomTextFieldData.CustomField2Data" class="form-control" />
+                        <span asp-validation-for="@item.CustomTextFieldData.CustomField2Data" class="text-danger"></span>
+                    </div>
+                }
+                @if (collection.CustomTextFields.CustomField3State)
+                {
+                    <div class="form-group">
+                        <label asp-for="@item.CustomTextFieldData.CustomField3Data" class="control-label">@collection.CustomTextFields.CustomField3Name</label>
+                        <input asp-for="@item.CustomTextFieldData.CustomField3Data" class="form-control" />
+                        <span asp-validation-for="@item.CustomTextFieldData.CustomField3Data" class="text-danger"></span>
+                    </div>
+                }
+                @if (collection.CustomIntegerFields.CustomField1State)
+                {
+                    <div class="form-group">
+                        <label asp-for="@item.CustomIntFieldData.CustomField1Data" class="control-label">@collection.CustomIntegerFields.CustomField1Name</label>
+                        <input asp-for="@item.CustomIntFieldData.CustomField1Data" class="form-control" />
+                        <span asp-validation-for="@item.CustomIntFieldData.CustomField1Data" class="text-danger"></span>
+                    </div>
+                }
+                @if (collection.CustomIntegerFields.CustomField2State)
+                {
+                    <div class="form-group">
+                        <label asp-for="@item.CustomIntFieldData.CustomField2Data" class="control-label">@collection.CustomIntegerFields.CustomField2Name</label>
+                        <input asp-for="@item.CustomIntFieldData.CustomField2Data" class="form-control" />
+                        <span asp-validation-for="@item.CustomIntFieldData.CustomField2Data" class="text-danger"></span>
+                    </div>
+                }
+                @if (collection.CustomIntegerFields.CustomField3State)
+                {
+                    <div class="form-group">
+                        <label asp-for="@item.CustomIntFieldData.CustomField3Data" class="control-label">@collection.CustomIntegerFields.CustomField3Name</label>
+                        <input asp-for="@item.CustomIntFieldData.CustomField3Data" class="form-control" />
+                        <span asp-validation-for="@item.CustomIntFieldData.CustomField3Data" class="text-danger"></span>
+                    </div>
+                }
+
+                @if (collection.CustomDateTimeFields.CustomField1State)
+                {
+                    <div class="form-group">
+                        <label asp-for="@item.CustomDateTimeFieldData.CustomField1Data" class="control-label">@collection.CustomDateTimeFields.CustomField1Name</label>
+                        <input asp-for="@item.CustomDateTimeFieldData.CustomField1Data" class="form-control" />
+                        <span asp-validation-for="@item.CustomDateTimeFieldData.CustomField1Data" class="text-danger"></span>
+                    </div>
+                }
+                @if (collection.CustomDateTimeFields.CustomField2State)
+                {
+                    <div class="form-group">
+                        <label asp-for="@item.CustomDateTimeFieldData.CustomField2Data" class="control-label">@collection.CustomDateTimeFields.CustomField2Name</label>
+                        <input asp-for="@item.CustomDateTimeFieldData.CustomField2Data" class="form-control" />
+                        <span asp-validation-for="@item.CustomDateTimeFieldData.CustomField2Data" class="text-danger"></span>
+                    </div>
+                }
+                @if (collection.CustomDateTimeFields.CustomField3State)
+                {
+                    <div class="form-group">
+                        <label asp-for="@item.CustomDateTimeFieldData.CustomField3Data" class="control-label">@collection.CustomDateTimeFields.CustomField3Name</label>
+                        <input asp-for="@item.CustomDateTimeFieldData.CustomField3Data" class="form-control" />
+                        <span asp-validation-for="@item.CustomDateTimeFieldData.CustomField3Data" class="text-danger"></span>
+                    </div>
+                }
+                @if (collection.CustomBoolFields.CustomField1State)
+                {
+                    <div class="form-group">
+                        <label asp-for="@item.CustomBoolFieldData.CustomField1Data" class="control-label">@collection.CustomBoolFields.CustomField1Name</label>
+                        <input asp-for="@item.CustomBoolFieldData.CustomField1Data" class="form-control" />
+                        <span asp-validation-for="@item.CustomBoolFieldData.CustomField1Data" class="text-danger"></span>
+                    </div>
+                }
+                @if (collection.CustomBoolFields.CustomField2State)
+                {
+                    <div class="form-group">
+                        <label asp-for="@item.CustomBoolFieldData.CustomField2Data" class="control-label">@collection.CustomBoolFields.CustomField2Name</label>
+                        <input asp-for="@item.CustomBoolFieldData.CustomField2Data" class="form-control" />
+                        <span asp-validation-for="@item.CustomBoolFieldData.CustomField2Data" class="text-danger"></span>
+                    </div>
+                }
+                @if (collection.CustomBoolFields.CustomField3State)
+                {
+                    <div class="form-group">
+                        <label asp-for="@item.CustomBoolFieldData.CustomField3Data" class="control-label">@collection.CustomBoolFields.CustomField3Name</label>
+                        <input asp-for="@item.CustomBoolFieldData.CustomField3Data" class="form-control" />
+                        <span asp-validation-for="@item.CustomBoolFieldData.CustomField3Data" class="text-danger"></span>
+                    </div>
+                }
+            }
         </form>
     </div>
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Index" asp-route-id="@collection.Id">Back to List</a>
 </div>
 
 @section Scripts {

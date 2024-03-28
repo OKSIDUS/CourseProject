@@ -14,7 +14,7 @@ namespace UserCollection.WebAPI.Controllers
         }
 
         [HttpPost("/Item/Create")]
-        public async Task<IActionResult> CreateItem(ItemModel item)
+        public async Task<IActionResult> CreateItem([FromBody] ItemModel item)
         {
             if (item is null)
             {
@@ -68,6 +68,13 @@ namespace UserCollection.WebAPI.Controllers
         {
             var collections = await service.FullTextSearch(query);
             return Ok(collections);
+        }
+
+        [HttpGet("/Item/Collection={id}")]
+        public async Task<IActionResult> GetCollectionItems(int id)
+        {
+            var items = await service.GetAllCollectionItemsAsync(id);
+            return Ok(items);
         }
     }
 }
