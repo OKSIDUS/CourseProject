@@ -1,9 +1,11 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace UserCollection.WebAPP.Controllers
 {
+    [Authorize(Roles ="admin")]
     public class UserController : Controller
     {
         private readonly UserManager<IdentityUser> userManager;
@@ -31,5 +33,22 @@ namespace UserCollection.WebAPP.Controllers
             await userManager.DeleteAsync(user);
             return RedirectToAction("Users");
         }
-    }
+
+        public async Task<IActionResult> BlockUser(string id)
+        {
+            var user = await userManager.FindByIdAsync(id);
+            user.LockoutEnd = DateTime.Now.AddYears(100);
+            await userManager.UpdateAsync(user);
+            return RedirectToAction("Users");
+        }
+
+        public async Task<IActionResult> UnlockUser(string id)
+        {
+            var user = await userManager.FindByIdAsync(id);
+            user.LockoutEnd = DateTime.Now.AddYears(-1);
+            await userManager.UpdateAsync(user);
+            return RedirectToAction("Users");
+
+        }
+    } 
 }

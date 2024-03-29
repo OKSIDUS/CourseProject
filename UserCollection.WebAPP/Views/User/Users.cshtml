@@ -16,11 +16,26 @@
         @foreach (var user in ViewBag.Users)
         {
             <tr>
-                <td>@user.UserName</td>
-                <td>@user.Email</td>
+                @{
+                    if (user.LockoutEnd != null && user.LockoutEnd >= DateTime.Now)
+                    {
+                        <td style="color: red">@user.UserName</td>
+                        <td style="color: red">@user.Email</td>
+                    }
+                    else
+                    {
+                        <td>@user.UserName</td>
+                        <td>@user.Email</td>
+                    }
+
+                }
+                
                 <td>
+
                     @Html.ActionLink("Details", "UserDetails", new { email = user.Email }) |
                     @Html.ActionLink("Delete", "DeleteUser", new {  id = user.Id })
+                    @Html.ActionLink("Block", "BlockUser", new { id = user.Id })
+                    @Html.ActionLink("Unblock", "UnlockUser", new {id = user.Id})
                 </td>
             </tr>
         }
