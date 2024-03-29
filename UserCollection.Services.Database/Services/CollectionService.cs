@@ -43,7 +43,9 @@ namespace UserCollection.Services.Database.Services
 
         public async Task<IEnumerable<CollectionModel>> GetAllCollectionsAsync()
         {
-            var collections = await dbContext.Collections.Include(c => c.Items).ToListAsync();
+            var collections = await dbContext.Collections.Include(c => c.Category)
+                .Include(i => i.Items)
+                .ToListAsync();
             return collections.Select(c => mapper.Map<CollectionModel>(c));
         }
 
@@ -55,7 +57,7 @@ namespace UserCollection.Services.Database.Services
 
         public async Task<IEnumerable<CollectionModel>> GetUserCollections(string userId)
         {
-            var collections = await dbContext.Collections.Where(c => c.UserId == userId).ToListAsync();
+            var collections = await dbContext.Collections.Include(c => c.Category).Where(c => c.UserId == userId).ToListAsync();
             return collections.Select(c => mapper.Map<CollectionModel>(c));
         }
 

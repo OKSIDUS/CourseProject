@@ -4,18 +4,11 @@
     ViewData["Title"] = "UserCollection";
 }
 
-<h1>UserCollection</h1>
+<h1>My collections</h1>
 
 <div>
-    <h4>CollectionModel</h4>
     <hr />
     <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Id)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Id)
-        </dd>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.Name)
         </dt>
@@ -29,19 +22,7 @@
             @Html.DisplayFor(model => model.Description)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.ImageUrl)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.ImageUrl)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.UserId)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.UserId)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.UserName)
+            Author
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.UserName)
@@ -53,10 +34,10 @@
             @Html.DisplayFor(model => model.IsPrivate)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.CategoryId)
+            Category
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.CategoryId)
+            @Html.DisplayFor(model => model.Category.Name)
         </dd>
         @if (Model.CustomStringFields.CustomField1State)
         {
@@ -199,5 +180,5 @@
 <div>
     @Html.ActionLink("Items", "CollectionItems", "Item", new { id = Model.Id })
     @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="UserCollections">Back to List</a>
 </div>

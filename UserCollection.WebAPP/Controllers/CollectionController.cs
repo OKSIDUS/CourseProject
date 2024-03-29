@@ -86,7 +86,6 @@ namespace UserCollection.WebAPP.Controllers
             return View();
         }
 
-        [Authorize(Policy = "AdminRole")]
         [HttpGet]
         public async Task<IActionResult> AllCollections()
         {
