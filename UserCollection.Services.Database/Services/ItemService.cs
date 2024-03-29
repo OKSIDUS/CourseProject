@@ -63,7 +63,7 @@ namespace UserCollection.Services.Database.Services
 
         public async Task<IEnumerable<ItemModel>> GetAllCollectionItemsAsync(int id)
         {
-            var items = await dbContext.Items.Where(i => i.CollectionId == id).ToListAsync();
+            var items = await dbContext.Items.Include(i => i.Collection).Where(i => i.CollectionId == id).ToListAsync();
             return items.Select(i => mapper.Map<ItemModel>(i));
         }
 

@@ -5,13 +5,6 @@
     ViewData["Title"] = "Index";
 }
 
-@{
-    if (User.IsInRole("admin"))
-    {
-        <h1><a href="@Url.Action("AllCollections")" class="card-link text-dark text-decoration-none">All Collections</a></h1>
-    }
-}
-
 <div class="row">
     @foreach (var item in Model.OrderByDescending(c => c.Items.Count()).Take(5))
     {

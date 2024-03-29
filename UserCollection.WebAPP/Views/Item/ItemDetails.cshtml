@@ -29,10 +29,10 @@
             @Html.DisplayFor(model => model.CreatedDate)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.CollectionId)
+            Collection
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.CollectionId)
+            @Html.DisplayFor(model => model.Collection.Name)
         </dd>
 
         @if (Model.Collection.CustomStringFields.CustomField1State)
@@ -175,5 +175,5 @@
 </div>
 <div>
     @Html.ActionLink("Edit", "ItemEdit", new {  id = Model.Id }) |
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="CollectionItems" asp-route-id="@Model.CollectionId">Back to List</a>
 </div>
