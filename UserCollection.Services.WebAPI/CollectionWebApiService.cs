@@ -9,8 +9,8 @@ namespace UserCollection.Services.WebAPI
     {
         private readonly HttpClient httpClient = new()
         {
-            //BaseAddress = new Uri("http://userCollectionWebApi.somee.com/"),
-            BaseAddress = new Uri("https://localhost:7292/"),
+            BaseAddress = new Uri("http://userCollectionWebApi.somee.com/"),
+            //BaseAddress = new Uri("https://localhost:7292/"),
             Timeout = TimeSpan.FromSeconds(200),
         };
 

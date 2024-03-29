@@ -36,11 +36,12 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Collection.Name)
             </td>
-            <td>
-                @Html.ActionLink("Edit", "ItemEdit", new {  id=item.Id }) |
-                @Html.ActionLink("Details", "ItemDetails", new {  id=item.Id }) |
-                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-            </td>
+                <td>
+                    <button onclick="location.href='@Url.Action("ItemEdit", new { id = item.Id })'" class="btn btn-primary">Edit</button> |
+                    <button onclick="location.href='@Url.Action("ItemDetails", new { id = item.Id })'" class="btn btn-primary">Details</button> |
+                    <button onclick="location.href='@Url.Action("ItemDelete", new { id = item.Id })'" class="btn btn-danger">Delete</button>
+                </td>
+
         </tr>
 }
     </tbody>

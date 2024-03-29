@@ -47,11 +47,11 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Category.Name)
             </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new {  id=item.Id }) |
-                @Html.ActionLink("Details", "UserCollection", new { id = item.Id }) |
-                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-            </td>
+                <td>
+                    <button onclick="location.href='@Url.Action("Edit", new { id = item.Id })'" class="btn btn-primary">Edit</button> |
+                    <button onclick="location.href='@Url.Action("UserCollection", new { id = item.Id })'" class="btn btn-primary">Details</button> |
+                    <button onclick="location.href='@Url.Action("Delete", new { id = item.Id })'" class="btn btn-danger">Delete</button>
+                </td>
         </tr>
 }
     </tbody>

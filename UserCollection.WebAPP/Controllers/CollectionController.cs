@@ -71,6 +71,12 @@ namespace UserCollection.WebAPP.Controllers
             return View();  
         }
 
+        public async Task<IActionResult> Delete(int id)
+        {
+            await service.DeleteCollectionAsync(id);
+            return RedirectToAction("UserCollections");
+        }
+
         [HttpPost]
         public async Task<IActionResult> Create(CollectionModel collection)
         {

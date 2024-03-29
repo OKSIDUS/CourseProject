@@ -174,7 +174,7 @@
     </dl>
 </div>
 <div>
-    @Html.ActionLink("Items", "CollectionItems", "Item", new { id = Model.Id })
-    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
-    <a asp-action="UserCollections">Back to List</a>
+    <button onclick="location.href='@Url.Action("CollectionItems", "Item", new { id = Model.Id })'" class="btn btn-primary">Items</button>
+    <button onclick="location.href='@Url.Action("Edit", new { id = Model.Id })'" class="btn btn-primary">Edit</button>
+    <button onclick="location.href='@Url.Action("UserCollections")'" class="btn btn-secondary">Back to List</button>
 </div>

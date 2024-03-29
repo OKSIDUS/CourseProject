@@ -77,5 +77,11 @@ namespace UserCollection.WebAPP.Controllers
 
             return View();
         }
+
+        public async Task<IActionResult> ItemDelete(int id)
+        {
+            await service.DeleteItemAsync(id);
+            return RedirectToAction("CollectionItems");
+        }
     }
 }
