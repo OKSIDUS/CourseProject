@@ -36,11 +36,18 @@ namespace UserCollection.WebAPP.Controllers
         }
 
         
-        public async Task<IActionResult> UserCollections()
+        public async Task<IActionResult> UserCollections(string? userId )
         {
-            var user = await userManager.GetUserAsync(User);
-            var collections = await service.GetUserCollections(user.Id);
-            return View(collections);
+            if (string.IsNullOrEmpty(userId))
+            {
+                var user = await userManager.GetUserAsync(User);
+                var collections = await service.GetUserCollections(user.Id);
+                return View(collections);
+            }
+
+            var collectionsForAdmin = await service.GetUserCollections(userId);
+            return View(collectionsForAdmin);
+            
         }
 
         public async Task<IActionResult> UserCollection(int id)
