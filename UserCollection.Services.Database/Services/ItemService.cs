@@ -40,7 +40,7 @@ namespace UserCollection.Services.Database.Services
 
         public async Task<IEnumerable<ItemModel>> FullTextSearch(string query)
         {
-            var items = await dbContext.Items
+            var items = await dbContext.Items.Include(i => i.Collection)
                 .Where(x => EF.Functions.Contains(x.Name, query)).ToListAsync();
 
             //var collectionIds = collections.Select(i => i.CollectionId).ToList();

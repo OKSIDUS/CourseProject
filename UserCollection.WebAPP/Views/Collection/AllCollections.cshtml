@@ -5,11 +5,8 @@
     var isAdmin = User.IsInRole("admin");
 }
 
-<h1>AllCollection</h1>
+<h1>All collection</h1>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
 <table class="table">
     <thead>
         <tr>
@@ -28,22 +25,22 @@
     <tbody>
         @foreach (var item in isAdmin ? Model : Model.Where(c => c.IsPrivate == false))
         {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.UserName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Category.Name)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new {  id=item.Id  }) |
-                @Html.ActionLink("Details", "Details", new {  id=item.Id }) |
-                @Html.ActionLink("Delete", "Delete", new {  id=item.Id })
-            </td>
-        </tr>
-}
+            <a href="@Url.Action("Details", new { id = item.Id })">
+            <tr>
+                <td>
+                        @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                        @Html.DisplayFor(modelItem => item.UserName)
+                </td>
+                <td>
+                        @Html.DisplayFor(modelItem => item.Category.Name)
+                </td>
+                <td>
+                        @(isAdmin ? Html.ActionLink("Edit", "Edit", new { id = item.Id }) : "")
+                </td>
+            </tr>
+            </a>
+        }
     </tbody>
 </table>
