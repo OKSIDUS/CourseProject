@@ -34,6 +34,7 @@ namespace UserCollection.WebAPI
             builder.Services.AddScoped<ICollectionService, CollectionService>();
             builder.Services.AddScoped<ICollectionItemService, ItemService>();
             builder.Services.AddScoped<ITagService, TagService>();
+            builder.Services.AddScoped<ICommentService, CommentService>();
 
             var app = builder.Build();
 

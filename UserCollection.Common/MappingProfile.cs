@@ -120,6 +120,8 @@ namespace UserCollection.Common
                 .ForMember(dest => dest.ItemsTags, opt => opt.Ignore())
                 .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Id))
                 .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.Name));
+
+            this.CreateMap<CommentModel, CommentEntity>().ReverseMap();
         }
 
         private CustomFieldsModel MapCustomFieldsModel(bool stateOne, string nameOne, bool stateTwo, string nameTwo, bool stateThree, string nameThree)
