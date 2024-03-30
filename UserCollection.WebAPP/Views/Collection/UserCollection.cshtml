@@ -176,5 +176,5 @@
 <div>
     <button onclick="location.href='@Url.Action("CollectionItems", "Item", new { id = Model.Id })'" class="btn btn-primary">Items</button>
     <button onclick="location.href='@Url.Action("Edit", new { id = Model.Id })'" class="btn btn-primary">Edit</button>
-    <button onclick="location.href='@Url.Action("UserCollections")'" class="btn btn-secondary">Back to List</button>
+    <a asp-controller="Collection" asp-action="UserCollections" asp-route-userId="@Model.UserId">User Collections</a>
 </div>

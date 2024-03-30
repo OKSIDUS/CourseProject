@@ -1,7 +1,17 @@
 ﻿@model UserCollection.WebAPI.Models.ItemModel
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
 
 @{
     ViewData["Title"] = "ItemDetails";
+    var currentUser = UserManager.GetUserAsync(User).Result;
+    bool isAdmin = User.IsInRole("admin");
+    bool isSameUser = false;
+    if(currentUser is not null)
+    {
+        isSameUser = currentUser.Id == Model.Collection.UserId;
+    }
 }
 
 <h1>Details</h1>
@@ -167,6 +177,11 @@
     </dl>
 </div>
 <div>
-    @Html.ActionLink("Edit", "ItemEdit", new {  id = Model.Id }) |
+    @if (isSameUser || isAdmin)
+    {
+        @Html.ActionLink("Edit", "ItemEdit", new { id = Model.Id })
+        
+    }
+    
     <a asp-action="CollectionItems" asp-route-id="@Model.CollectionId">Back to List</a>
 </div>

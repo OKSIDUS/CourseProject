@@ -177,5 +177,8 @@
     {
         @Html.ActionLink("Edit", "Edit", new { id = Model.Id })
     }
-    <button onclick="location.href='@Url.Action("UserCollections")'" class="btn btn-secondary">Back to List</button>
+    <form method="get" asp-controller="Collection" asp-action="UserCollections">
+        <input type="hidden" name="userId" value="@Model.UserId" />
+        <button type="submit" class="btn btn-secondary">Back to List</button>
+    </form>
 </div>

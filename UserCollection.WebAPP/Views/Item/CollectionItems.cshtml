@@ -1,14 +1,33 @@
 ﻿@model IEnumerable<UserCollection.WebAPI.Models.ItemModel>
 
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+
 @{
     ViewData["Title"] = "CollectionItems";
+    var currentUser = UserManager.GetUserAsync(User).Result;
+    bool isAdmin = User.IsInRole("admin");
+    bool isSameUser = false;
+    if (currentUser is not null)
+    {
+        var user = Model.FirstOrDefault();
+        if (user is not null)
+        {
+            isSameUser = currentUser.Id == user.Collection.UserId;
+        }
+    }
 }
 
 <h1>Collection Items</h1>
+@if (isSameUser || isAdmin)
+{
+    <p>
+        <a asp-action="CreateItem" asp-route-id="@ViewBag.CollectionId">Create New</a>
+    </p>
 
-<p>
-    <a asp-action="CreateItem" asp-route-id="@ViewBag.CollectionId">Create New</a>
-</p>
+}
+
 <table class="table">
     <thead>
         <tr>
@@ -37,12 +56,21 @@
                 @Html.DisplayFor(modelItem => item.Collection.Name)
             </td>
                 <td>
-                    <button onclick="location.href='@Url.Action("ItemEdit", new { id = item.Id })'" class="btn btn-primary">Edit</button> |
+                    @if (isSameUser || isAdmin)
+                    {
+                        <button onclick="location.href='@Url.Action("ItemEdit", new { id = item.Id })'" class="btn btn-primary">Edit</button>
+                        <button onclick="location.href='@Url.Action("ItemDelete", new { id = item.Id })'" class="btn btn-danger">Delete</button>
+
+                    }
+                    
                     <button onclick="location.href='@Url.Action("ItemDetails", new { id = item.Id })'" class="btn btn-primary">Details</button> |
-                    <button onclick="location.href='@Url.Action("ItemDelete", new { id = item.Id })'" class="btn btn-danger">Delete</button>
+                    
                 </td>
 
         </tr>
 }
     </tbody>
 </table>
+<div>
+    <button onclick="location.href='@Url.Action("UserCollections", "Collection")'">Back to List</button>
+</div>

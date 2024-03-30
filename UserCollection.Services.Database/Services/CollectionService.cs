@@ -43,9 +43,12 @@ namespace UserCollection.Services.Database.Services
 
         public async Task<IEnumerable<CollectionModel>> GetAllCollectionsAsync()
         {
-            var collections = await dbContext.Collections.Include(c => c.Category)
-                .Include(i => i.Items)
+            var category = await dbContext.Categories
+                .Include(i => i.UserCollections)
+                .ThenInclude(c => c.Items)
                 .ToListAsync();
+
+            var collections = category.SelectMany(c => c.UserCollections).ToList();
             return collections.Select(c => mapper.Map<CollectionModel>(c));
         }
 
