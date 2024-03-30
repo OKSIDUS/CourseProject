@@ -14,7 +14,7 @@ namespace UserCollection.WebAPI.Controllers
         }
 
         [HttpPost("/Comment/Create")]
-        public async Task<IActionResult> CreateComment(CommentModel comment)
+        public async Task<IActionResult> CreateComment([FromBody] CommentModel comment)
         {
             if (comment is null)
             {

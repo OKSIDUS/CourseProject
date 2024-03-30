@@ -5,7 +5,7 @@ namespace UserCollection.Services.Interfaces
 {
     public interface ICommentService
     {
-        public Task CreateComment(CommentModel commet);
+        public Task CreateComment(CommentModel comment);
 
         public Task<IEnumerable<CommentModel>> GetAllItemsComments(int id);
     }

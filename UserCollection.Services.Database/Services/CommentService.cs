@@ -17,11 +17,11 @@ namespace UserCollection.Services.Database.Services
             this.mapper = mapper;
         }
 
-        public async Task CreateComment(CommentModel commet)
+        public async Task CreateComment(CommentModel comment)
         {
-            if (commet is not null)
+            if (comment is not null)
             {
-                var commentEntity = mapper.Map<CommentEntity>(commet);
+                var commentEntity = mapper.Map<CommentEntity>(comment);
                 await dbContext.Comments.AddAsync(commentEntity);
                 await dbContext.SaveChangesAsync();
             }

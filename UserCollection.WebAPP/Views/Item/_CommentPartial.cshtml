@@ -1,0 +1,38 @@
+﻿@using UserCollection.WebAPI.Models
+@model UserCollection.WebAPI.Models.ItemModel
+
+<h4>Comments:</h4>
+
+@if (Model.Comments.Any())
+{
+    <ul class="list-group">
+        @foreach (var comment in Model.Comments)
+        {
+            <li class="list-group-item">
+                <div>
+                    <strong>@comment.Author</strong>
+                    <span class="badge badge-primary">@comment.Text</span>
+                </div>
+                <div>@comment.Text</div>
+            </li>
+        }
+    </ul>
+}
+else
+{
+    <p class="alert alert-info">No comments yet.</p>
+}
+
+<h4>Add Comment:</h4>
+@{
+    var newComment = new CommentModel();
+}
+<form asp-action="CreateComment" asp-controller="Comment" method="post">
+    <input type="hidden" name="ItemId" value="@Model.Id" />
+    <div class="form-group">
+        <label asp-for="@newComment.Text"></label>
+        <textarea class="form-control" name="Text"></textarea>
+        <span asp-validation-for="@newComment.Text" class="text-danger"></span>
+    </div>
+    <button type="submit" class="btn btn-primary">Add Comment</button>
+</form>

@@ -33,6 +33,7 @@ namespace UserCollection.WebAPP
             builder.Services.AddScoped<ICategoryService, CategoryWebApiService>();
             builder.Services.AddScoped<ICollectionService, CollectionWebApiService>();
             builder.Services.AddScoped<ICollectionItemService, ItemWebApiService>();
+            builder.Services.AddScoped<ICommentService, CommentWebApiService>();
 
             builder.Services.AddRazorPages();
             var app = builder.Build();
