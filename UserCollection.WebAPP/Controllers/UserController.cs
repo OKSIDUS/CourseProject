@@ -9,9 +9,11 @@ namespace UserCollection.WebAPP.Controllers
     public class UserController : Controller
     {
         private readonly UserManager<IdentityUser> userManager;
-        public UserController(UserManager<IdentityUser> userManager)
+        private readonly SignInManager<IdentityUser> signInManager;
+        public UserController(UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager)
         {
             this.userManager = userManager;
+            this.signInManager = signInManager;
         }
         public async Task<IActionResult> Users()
         {
@@ -49,6 +51,36 @@ namespace UserCollection.WebAPP.Controllers
             await userManager.UpdateAsync(user);
             return RedirectToAction("Users");
 
+        }
+
+        public async Task<IActionResult> SetAdmin(string id)
+        {
+            var user = await userManager.FindByIdAsync(id);
+            if (!await userManager.IsInRoleAsync(user, "admin"))
+            {
+                await userManager.AddToRoleAsync(user, "admin");
+                await userManager.UpdateAsync(user);
+            }
+
+            return RedirectToAction("Users");
+        }
+
+        public async Task<IActionResult> UnsetAdmin(string id)
+        {
+            var user = await userManager.FindByIdAsync(id);
+            if(await userManager.IsInRoleAsync(user, "admin"))
+            {
+                await userManager.RemoveFromRoleAsync(user, "admin");
+                await userManager.UpdateAsync(user);
+            }
+
+            var authorizeUser = await userManager.GetUserAsync(User);
+            if(user.Id == authorizeUser.Id)
+            {
+                await signInManager.SignOutAsync();
+                return RedirectToAction("Index", "Collection");
+            }
+            return RedirectToAction("Users");
         }
     } 
 }

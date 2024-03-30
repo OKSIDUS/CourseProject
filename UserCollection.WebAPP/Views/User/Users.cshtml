@@ -1,4 +1,6 @@
-﻿@{
+﻿@using Microsoft.AspNetCore.Identity
+@inject Microsoft.AspNetCore.Identity.UserManager<IdentityUser> UserManager
+@{
     ViewData["Title"] = "User list";
 }
 
@@ -9,6 +11,8 @@
         <tr>
             <th>User name</th>
             <th>Email</th>
+            <th>Role</th>
+            <th></th>
             <th></th>
         </tr>
     </thead>
@@ -17,15 +21,18 @@
         {
             <tr>
                 @{
+                    var isAdmin = await UserManager.IsInRoleAsync(user, "admin");
                     if (user.LockoutEnd != null && user.LockoutEnd >= DateTime.Now)
                     {
                         <td style="color: red">@user.UserName</td>
                         <td style="color: red">@user.Email</td>
+                        <td style="color: red">@(isAdmin ? "admin" : "user")</td>
                     }
                     else
                     {
                         <td>@user.UserName</td>
                         <td>@user.Email</td>
+                        <td>@(isAdmin ? "admin" : "user")</td>
                     }
 
                 }
@@ -37,6 +44,7 @@
                     @Html.ActionLink("Block", "BlockUser", new { id = user.Id })
                     @Html.ActionLink("Unblock", "UnlockUser", new {id = user.Id})
                 </td>
+                <td>@(isAdmin ? Html.ActionLink("Admin delete", "UnsetAdmin", new { id = user.Id }) : Html.ActionLink("Set Admin", "SetAdmin", new { id = user.Id }))</td>
             </tr>
         }
     </tbody>
