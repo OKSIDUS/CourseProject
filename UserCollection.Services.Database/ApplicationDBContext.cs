@@ -16,6 +16,8 @@ namespace UserCollection.Services.Database
 
         public DbSet<ItemsTagsEntity> ItemsTags { get; set; }
 
+        public DbSet<CommentEntity> Comments { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<CollectionEntity>()
@@ -46,6 +48,13 @@ namespace UserCollection.Services.Database
                 .HasOne(it => it.Tag)
                 .WithMany(t => t.ItemsTags)
                 .HasForeignKey(it => it.TagId)
+                .IsRequired()
+                .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<CommentEntity>()
+                .HasOne(c => c.Item)
+                .WithMany(c => c.Comments)
+                .HasForeignKey(c => c.ItemId)
                 .IsRequired()
                 .OnDelete(DeleteBehavior.Cascade);
         }

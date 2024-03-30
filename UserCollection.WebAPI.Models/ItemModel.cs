@@ -14,6 +14,8 @@ namespace UserCollection.WebAPI.Models
 
         public CollectionModel Collection { get; set; } = null!;
 
+        public ICollection<CommentModel> Comments { get; set; } = new List<CommentModel>();
+
         public ICollection<TagModel> Tags { get; set; } = new List<TagModel>();
 
         public CustomFieldForData<int?> CustomIntFieldData { get; set; } = new CustomFieldForData<int?>();

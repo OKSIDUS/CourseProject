@@ -1,5 +1,4 @@
 ﻿using System.Text.Json.Serialization;
-using UserCollection.WebAPI.Models;
 
 namespace UserCollection.Services.Database.Entities
 {

@@ -15,6 +15,8 @@ namespace UserCollection.Services.Database.Entities
         public int CollectionId { get; set; }
         public CollectionEntity Collection { get; set; } = null!;
 
+        public ICollection<CommentEntity> Comments { get; set; } = new List<CommentEntity>();
+
         public ICollection<ItemsTagsEntity> ItemsTags { get; set; } = new List<ItemsTagsEntity>();
         public int? CustomIntField1Data { get; set; }
         public int? CustomIntField2Data { get; set; }
