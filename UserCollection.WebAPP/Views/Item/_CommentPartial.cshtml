@@ -1,5 +1,12 @@
 ﻿@using UserCollection.WebAPI.Models
 @model UserCollection.WebAPI.Models.ItemModel
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+
+@{
+    var currentUser = UserManager.GetUserAsync(User).Result;
+}
 
 <h4>Comments:</h4>
 
@@ -20,19 +27,22 @@
 }
 else
 {
-    <p class="alert alert-info">No comments yet.</p>
+    <p class="alert alert-info" id="noComments">No comments yet.</p>
 }
-
+<div id="messagesList">
+</div>
 <h4>Add Comment:</h4>
 @{
     var newComment = new CommentModel();
 }
-<form asp-action="CreateComment" asp-controller="Comment" method="post">
-    <input type="hidden" name="ItemId" value="@Model.Id" />
+<form id="addCommentForm" asp-action="CreateComment" asp-controller="Comment" method="post">
+    <input type="hidden" name="ItemId" id="id" value="@Model.Id" />
+    <input type="hidden" id="userInput" name="UserName" value="@currentUser.UserName" />
     <div class="form-group">
         <label asp-for="@newComment.Text"></label>
-        <textarea class="form-control" name="Text"></textarea>
+        <textarea id="commentText" class="form-control" name="Text"></textarea>
         <span asp-validation-for="@newComment.Text" class="text-danger"></span>
     </div>
-    <button type="submit" class="btn btn-primary">Add Comment</button>
+    <button type="submit" id="SendButton" class="btn btn-primary">Add Comment</button>
 </form>
+

@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using UserCollection.Services.Interfaces;
 using UserCollection.Services.WebAPI;
 using UserCollection.WebAPP.Data;
+using UserCollection.WebAPP.Hubs;
 
 namespace UserCollection.WebAPP
 {
@@ -35,6 +36,8 @@ namespace UserCollection.WebAPP
             builder.Services.AddScoped<ICollectionItemService, ItemWebApiService>();
             builder.Services.AddScoped<ICommentService, CommentWebApiService>();
 
+            builder.Services.AddSignalR();
+
             builder.Services.AddRazorPages();
             var app = builder.Build();
 
@@ -63,6 +66,13 @@ namespace UserCollection.WebAPP
                 name: "default",
                 pattern: "{controller=Collection}/{action=Index}/{id?}");
             app.MapRazorPages();
+
+            //app.MapHub<CommentHub>("/commentHub");
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapHub<CommentHub>("/commentHub");
+                endpoints.MapControllers();
+            });
 
             app.Run();
         }
