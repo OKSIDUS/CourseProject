@@ -25,8 +25,7 @@
     <tbody>
         @foreach (var item in isAdmin ? Model : Model.Where(c => c.IsPrivate == false))
         {
-            <a href="@Url.Action("Details", new { id = item.Id })">
-            <tr>
+            <tr onclick="window.location.href = '@Url.Action("Details", "Collection", new { id = item.Id })';">
                 <td>
                         @Html.DisplayFor(modelItem => item.Name)
                 </td>
@@ -40,7 +39,6 @@
                         @(isAdmin ? Html.ActionLink("Edit", "Edit", new { id = item.Id }) : "")
                 </td>
             </tr>
-            </a>
         }
     </tbody>
 </table>

@@ -31,10 +31,13 @@ else
 }
 <div id="messagesList">
 </div>
-<h4>Add Comment:</h4>
 @{
+    if(currentUser is not null)
+    {
+        <h4>Add Comment:</h4>
+
     var newComment = new CommentModel();
-}
+
 <form id="addCommentForm" asp-action="CreateComment" asp-controller="Comment" method="post">
     <input type="hidden" name="ItemId" id="id" value="@Model.Id" />
     <input type="hidden" id="userInput" name="UserName" value="@currentUser.UserName" />
@@ -45,4 +48,7 @@ else
     </div>
     <button type="submit" id="SendButton" class="btn btn-primary">Add Comment</button>
 </form>
+    }
+}
+
 

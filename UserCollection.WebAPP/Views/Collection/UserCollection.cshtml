@@ -176,5 +176,8 @@
 <div>
     <button onclick="location.href='@Url.Action("CollectionItems", "Item", new { id = Model.Id })'" class="btn btn-primary">Items</button>
     <button onclick="location.href='@Url.Action("Edit", new { id = Model.Id })'" class="btn btn-primary">Edit</button>
-    <a asp-controller="Collection" asp-action="UserCollections" asp-route-userId="@Model.UserId">User Collections</a>
+    <form method="get" asp-controller="Collection" asp-action="UserCollections">
+        <input type="hidden" name="userId" value="@Model.UserId" />
+        <button type="submit" class="btn btn-secondary">User Collections</button>
+    </form>
 </div>

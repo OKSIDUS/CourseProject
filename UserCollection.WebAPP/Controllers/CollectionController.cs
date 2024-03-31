@@ -41,6 +41,10 @@ namespace UserCollection.WebAPP.Controllers
             if (string.IsNullOrEmpty(userId))
             {
                 var user = await userManager.GetUserAsync(User);
+                if (user is null)
+                {
+                    return RedirectToAction("Index");
+                }
                 var collections = await service.GetUserCollections(user.Id);
                 return View(collections);
             }

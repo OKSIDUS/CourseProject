@@ -179,11 +179,14 @@
 <div>
     @if (isSameUser || isAdmin)
     {
-        @Html.ActionLink("Edit", "ItemEdit", new { id = Model.Id })
+        <button onclick="window.location.href='@Url.Action("ItemEdit", new { id = Model.Id })'" class="btn btn-primary">Edit</button>
+
         
     }
     
-    <a asp-action="CollectionItems" asp-route-id="@Model.CollectionId">Back to List</a>
+    <form asp-controller="Item" asp-action="CollectionItems" asp-route-id="@Model.CollectionId">
+        <button type="submit" class="btn btn-secondary">Back to List</button>
+    </form>
 </div>
 
 <div class="container">
