@@ -15,5 +15,7 @@ namespace UserCollection.Services.Interfaces
         public Task UpdateCollectionAsync(CollectionModel collection);
 
         public Task<IEnumerable<CollectionModel>> GetUserCollections(string userId);
+
+        public Task<IEnumerable<CollectionModel>> GetFiveBiggestCollectionsAsync();
     }
 }

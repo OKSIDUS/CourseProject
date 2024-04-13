@@ -58,6 +58,12 @@ namespace UserCollection.Services.Database.Services
             return mapper.Map<CollectionModel>(collection);
         }
 
+        public async Task<IEnumerable<CollectionModel>> GetFiveBiggestCollectionsAsync()
+        {
+            var collections = await dbContext.Collections.Include(c => c.Category).OrderByDescending(c => c.Items.Count()).Take(5).ToListAsync();
+            return collections.Select(c => mapper.Map<CollectionModel>(c));
+        }
+
         public async Task<IEnumerable<CollectionModel>> GetUserCollections(string userId)
         {
             var collections = await dbContext.Collections.Include(c => c.Category).Where(c => c.UserId == userId).ToListAsync();

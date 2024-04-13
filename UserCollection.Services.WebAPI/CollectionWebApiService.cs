@@ -9,8 +9,8 @@ namespace UserCollection.Services.WebAPI
     {
         private readonly HttpClient httpClient = new()
         {
-            BaseAddress = new Uri("http://userCollectionWebApi.somee.com/"),
-            //BaseAddress = new Uri("https://localhost:7292/"),
+            //BaseAddress = new Uri("http://userCollectionWebApi.somee.com/"),
+            BaseAddress = new Uri("https://localhost:7292/"),
             Timeout = TimeSpan.FromSeconds(200),
         };
 
@@ -58,6 +58,21 @@ namespace UserCollection.Services.WebAPI
             }
 
             return new CollectionModel();
+        }
+
+        public async Task<IEnumerable<CollectionModel>> GetFiveBiggestCollectionsAsync()
+        {
+            var response = await httpClient.GetAsync("Collection/FiveBiggest");
+            if (response.IsSuccessStatusCode)
+            {
+                var collections = await response.Content.ReadFromJsonAsync<IEnumerable<CollectionModel>>();
+                if (collections is not null)
+                {
+                    return collections!;
+                }
+            }
+
+            return new List<CollectionModel>();
         }
 
         public async Task<IEnumerable<CollectionModel>> GetUserCollections(string userId)

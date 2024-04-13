@@ -24,8 +24,11 @@ namespace UserCollection.WebAPP.Controllers
 
         public async Task<IActionResult> Index()
         {
-            var collections = await service.GetAllCollectionsAsync();
-            
+            var collections = await service.GetFiveBiggestCollectionsAsync();
+            if (collections is not null)
+            {
+
+            }
             return View(collections);
         }
 

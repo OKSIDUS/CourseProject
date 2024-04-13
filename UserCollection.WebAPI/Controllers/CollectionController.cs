@@ -69,5 +69,16 @@ namespace UserCollection.WebAPI.Controllers
             var collections = await service.GetUserCollections(userId);
             return Ok(collections);
         }
+
+        [HttpGet("/Collection/FiveBiggest")]
+        public async Task<IActionResult> GetFiveBiggestCollections()
+        {
+            var collections = await service.GetFiveBiggestCollectionsAsync();
+            if (collections.Count() == 5)
+            {
+
+            }
+            return Ok(collections);
+        }
     }
 }
