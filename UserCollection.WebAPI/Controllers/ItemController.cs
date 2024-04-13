@@ -76,5 +76,12 @@ namespace UserCollection.WebAPI.Controllers
             var items = await service.GetAllCollectionItemsAsync(id);
             return Ok(items);
         }
+
+        [HttpGet("/Item/LastAdded")]
+        public async Task<IActionResult> GetLastAddedItems()
+        {
+            var items = await service.GetLastAddedItems();
+            return Ok(items);
+        }
     }
 }

@@ -73,6 +73,15 @@ namespace UserCollection.Services.Database.Services
             return mapper.Map<ItemModel>(item);
         }
 
+        public async Task<IEnumerable<ItemModel>> GetLastAddedItems()
+        {
+            var items = await dbContext.Items.Include(c => c.Collection)
+                .OrderByDescending(i => i.DateOfCreating)
+                .Take(10)
+                .ToListAsync();
+            return items.Select(i => mapper.Map<ItemModel>(i));
+        }
+
         public async Task UpdateItemAsync(ItemModel item)
         {
             var itemEntity = await dbContext.Items.Where(i => i.Id == item.Id).FirstOrDefaultAsync();

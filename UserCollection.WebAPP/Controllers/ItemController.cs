@@ -83,5 +83,11 @@ namespace UserCollection.WebAPP.Controllers
             await service.DeleteItemAsync(id);
             return RedirectToAction("CollectionItems");
         }
+
+        public async Task<IActionResult> GetLastAdded()
+        {
+            var items = await service.GetLastAddedItems();
+            return PartialView("_TenNewItemsPartial", items);
+        }
     }
 }

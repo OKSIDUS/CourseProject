@@ -87,6 +87,21 @@ namespace UserCollection.Services.WebAPI
             return new ItemModel();
         }
 
+        public async Task<IEnumerable<ItemModel>> GetLastAddedItems()
+        {
+            var response = await httpClient.GetAsync("Item/LastAdded");
+            if (response.IsSuccessStatusCode)
+            {
+                var items = await response.Content.ReadFromJsonAsync<IEnumerable<ItemModel>>();
+                if (items is not null)
+                {
+                    return items;
+                }
+            }
+
+            return new List<ItemModel>();
+        }
+
         public async Task UpdateItemAsync(ItemModel item)
         {
             var json = JsonSerializer.Serialize(item);
@@ -95,5 +110,7 @@ namespace UserCollection.Services.WebAPI
 
             var response = await httpClient.PostAsync("Item/Update", content);
         }
+
+
     }
 }

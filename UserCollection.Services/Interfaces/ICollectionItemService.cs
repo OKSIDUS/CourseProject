@@ -18,6 +18,8 @@ namespace UserCollection.Services.Interfaces
 
         public Task<IEnumerable<ItemModel>> GetAllCollectionItemsAsync(int id);
 
+        public Task<IEnumerable<ItemModel>> GetLastAddedItems();
+
 
     }
 }

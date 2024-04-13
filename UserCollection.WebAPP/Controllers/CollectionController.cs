@@ -14,21 +14,21 @@ namespace UserCollection.WebAPP.Controllers
         private readonly ICollectionService service;
         private readonly UserManager<IdentityUser> userManager;
         private readonly ICategoryService categoryService;
+        private readonly ICollectionItemService itemService;
 
-        public CollectionController(ICollectionService service, UserManager<IdentityUser> userManager, ICategoryService categoryService)
+        public CollectionController(ICollectionService service, UserManager<IdentityUser> userManager, ICategoryService categoryService, ICollectionItemService itemService)
         {
             this.service = service;
             this.userManager = userManager;
             this.categoryService = categoryService;
+            this.itemService = itemService;
         }
 
         public async Task<IActionResult> Index()
         {
             var collections = await service.GetFiveBiggestCollectionsAsync();
-            if (collections is not null)
-            {
-
-            }
+            var items = await itemService.GetLastAddedItems();
+            ViewBag.Items = items;
             return View(collections);
         }
 
