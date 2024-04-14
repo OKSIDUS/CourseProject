@@ -64,6 +64,22 @@ namespace UserCollection.Services.Database.Services
             return collections.Select(c => mapper.Map<CollectionModel>(c));
         }
 
+        public Task<IEnumerable<CollectionModel>> GetPageOfCollectionForAdmin(int pageSize, int pageNumber)
+        {
+            throw new NotImplementedException();
+        }
+
+        public async Task<IEnumerable<CollectionModel>> GetPageOfCollectionForUser(int pageSize, int pageNumber)
+        {
+            var collections = await dbContext.Collections
+                .Include(c => c.Category)
+                .Where(c => c.IsPrivate == false)
+                .Skip((pageNumber - 1) * pageSize)
+                .Take(pageSize)
+                .ToListAsync();
+            return collections.Select(c => mapper.Map<CollectionModel>(c));
+        }
+
         public async Task<IEnumerable<CollectionModel>> GetUserCollections(string userId)
         {
             var collections = await dbContext.Collections.Include(c => c.Category).Where(c => c.UserId == userId).ToListAsync();
