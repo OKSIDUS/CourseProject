@@ -87,5 +87,12 @@ namespace UserCollection.WebAPI.Controllers
             var collection = await service.GetPageOfCollectionForUser(pageSize, pageNumber);
             return Ok(collection);
         }
+
+        [HttpGet("/Collection/Admin/page={pageNumber}/size={pageSize}")]
+        public async Task<IActionResult> GetPageOfCollectionForAdmin(int pageNumber, int pageSize)
+        {
+            var collection = await service.GetPageOfCollectionForAdmin(pageSize, pageNumber);
+            return Ok(collection);
+        }
     }
 }

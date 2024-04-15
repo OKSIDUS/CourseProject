@@ -64,9 +64,14 @@ namespace UserCollection.Services.Database.Services
             return collections.Select(c => mapper.Map<CollectionModel>(c));
         }
 
-        public Task<IEnumerable<CollectionModel>> GetPageOfCollectionForAdmin(int pageSize, int pageNumber)
+        public async Task<IEnumerable<CollectionModel>> GetPageOfCollectionForAdmin(int pageSize, int pageNumber)
         {
-            throw new NotImplementedException();
+            var collections = await dbContext.Collections
+                .Include(c => c.Category)
+                .Skip((pageNumber - 1) * pageSize)
+                .Take(pageSize)
+                .ToListAsync();
+            return collections.Select(c => mapper.Map<CollectionModel>(c));
         }
 
         public async Task<IEnumerable<CollectionModel>> GetPageOfCollectionForUser(int pageSize, int pageNumber)

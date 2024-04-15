@@ -100,10 +100,19 @@ namespace UserCollection.WebAPP.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> AllCollections()
+        public async Task<IActionResult> AllCollections(int pageSize = 10, int pageNumber = 1)
         {
-            var collections = await service.GetAllCollectionsAsync();
-            return View(collections);
+            var user = await userManager.GetUserAsync(User);
+            if ( user is not null && await userManager.IsInRoleAsync(user, "admin"))
+            {
+                var collectionsForAdmin = await service.GetPageOfCollectionForAdmin(pageSize, pageNumber);
+                return View(collectionsForAdmin);
+            }
+            else
+            {
+                var collectionsForUser = await service.GetPageOfCollectionForUser(pageSize, pageNumber);
+                return View(collectionsForUser);
+            }
         }
 
         [HttpGet]

@@ -75,6 +75,36 @@ namespace UserCollection.Services.WebAPI
             return new List<CollectionModel>();
         }
 
+        public async Task<IEnumerable<CollectionModel>> GetPageOfCollectionForAdmin(int pageSize, int pageNumber)
+        {
+            var respone = await httpClient.GetAsync($"Collection/Admin/page={pageNumber}/size={pageSize}");
+            if (respone.IsSuccessStatusCode)
+            {
+                var collections = await respone.Content.ReadFromJsonAsync<IEnumerable<CollectionModel>>();
+                if (collections is not null)
+                {
+                    return collections!;
+                }
+            }
+
+            return new List<CollectionModel>();
+        }
+
+        public async Task<IEnumerable<CollectionModel>> GetPageOfCollectionForUser(int pageSize, int pageNumber)
+        {
+            var respone = await httpClient.GetAsync($"Collection/page={pageNumber}/size={pageSize}");
+            if (respone.IsSuccessStatusCode)
+            {
+                var collections = await respone.Content.ReadFromJsonAsync<IEnumerable<CollectionModel>>();
+                if (collections is not null)
+                {
+                    return collections!;
+                }
+            }
+
+            return new List<CollectionModel>();
+        }
+
         public async Task<IEnumerable<CollectionModel>> GetUserCollections(string userId)
         {
             var response = await httpClient.GetAsync($"Collection/user={userId}");
