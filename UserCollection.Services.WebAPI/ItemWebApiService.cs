@@ -110,7 +110,5 @@ namespace UserCollection.Services.WebAPI
 
             var response = await httpClient.PostAsync("Item/Update", content);
         }
-
-
     }
 }
