@@ -1,17 +1,17 @@
-﻿@model IEnumerable<UserCollection.WebAPI.Models.CollectionModel>
+﻿@model UserCollection.WebAPI.Models.CollectionPageViewModel
 
 @{
     ViewData["Title"] = "AllCollections";
     var isAdmin = User.IsInRole("admin");
 }
 
-<h1>All collection</h1>
+<h1>All collection + @Model.CountOfPage</h1>
 
 <table class="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Name)
+                Name
             </th>
             <th>
                 Author
@@ -23,20 +23,20 @@
         </tr>
     </thead>
     <tbody>
-        @foreach (var item in Model)
+        @foreach (var collection in Model.Collections)
         {
-            <tr onclick="window.location.href = '@Url.Action("Details", "Collection", new { id = item.Id })';">
+            <tr onclick="window.location.href = '@Url.Action("Details", "Collection", new { id = collection.Id })';">
                 <td>
-                        @Html.DisplayFor(modelItem => item.Name)
+                    @Html.DisplayFor(modelItem => collection.Name)
                 </td>
                 <td>
-                        @Html.DisplayFor(modelItem => item.UserName)
+                    @Html.DisplayFor(modelItem => collection.UserName)
                 </td>
                 <td>
-                        @Html.DisplayFor(modelItem => item.Category.Name)
+                    @Html.DisplayFor(modelItem => collection.Category.Name)
                 </td>
                 <td>
-                        @(isAdmin ? Html.ActionLink("Edit", "Edit", new { id = item.Id }) : "")
+                    @(isAdmin ? Html.ActionLink("Edit", "Edit", new { id = collection.Id }) : "")
                 </td>
             </tr>
         }

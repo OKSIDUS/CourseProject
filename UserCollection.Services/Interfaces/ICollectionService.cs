@@ -18,7 +18,7 @@ namespace UserCollection.Services.Interfaces
 
         public Task<IEnumerable<CollectionModel>> GetFiveBiggestCollectionsAsync();
 
-        public Task<IEnumerable<CollectionModel>> GetPageOfCollectionForUser(int pageSize, int pageNumber);
+        public Task<CollectionPageViewModel> GetPageOfCollectionForUser(int pageSize, int pageNumber);
 
         public Task<IEnumerable<CollectionModel>> GetPageOfCollectionForAdmin(int pageSize, int pageNumber);
     }

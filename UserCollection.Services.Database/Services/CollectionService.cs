@@ -74,15 +74,22 @@ namespace UserCollection.Services.Database.Services
             return collections.Select(c => mapper.Map<CollectionModel>(c));
         }
 
-        public async Task<IEnumerable<CollectionModel>> GetPageOfCollectionForUser(int pageSize, int pageNumber)
+        public async Task<CollectionPageViewModel> GetPageOfCollectionForUser(int pageSize, int pageNumber)
         {
+            var collectionsInfo = new CollectionPageViewModel();
+            collectionsInfo.CurrentPage = pageNumber;
+            var countOfPage = await dbContext.Collections
+                .Where(c => c.IsPrivate == false)
+                .CountAsync();
+            collectionsInfo.CountOfPage = (int)Math.Ceiling(countOfPage / (double)pageSize);
             var collections = await dbContext.Collections
                 .Include(c => c.Category)
                 .Where(c => c.IsPrivate == false)
                 .Skip((pageNumber - 1) * pageSize)
                 .Take(pageSize)
                 .ToListAsync();
-            return collections.Select(c => mapper.Map<CollectionModel>(c));
+            collectionsInfo.Collections = collections.Select(c => mapper.Map<CollectionModel>(c));
+            return collectionsInfo;
         }
 
         public async Task<IEnumerable<CollectionModel>> GetUserCollections(string userId)
