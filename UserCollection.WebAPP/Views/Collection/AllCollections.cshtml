@@ -42,3 +42,14 @@
         }
     </tbody>
 </table>
+<div>
+    <ul class="pagination">
+        @for (int i = 1; i <= Model.CountOfPage; i++)
+        {
+            <li class="page-item @(i == Model.CurrentPage ? "active" : "")">
+                <a class="page-link" href="@Url.Action("AllCollections", "Collection", new { pageNumber = i })">@i</a>
+            </li>
+        }
+    </ul>
+</div>
+
