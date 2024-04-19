@@ -64,24 +64,27 @@ namespace UserCollection.Services.Database.Services
             return collections.Select(c => mapper.Map<CollectionModel>(c));
         }
 
-        public async Task<IEnumerable<CollectionModel>> GetPageOfCollectionForAdmin(int pageSize, int pageNumber)
+        public async Task<CollectionPageViewModel> GetPageOfCollectionForAdmin(int pageSize, int pageNumber)
         {
+            var collectionsInfo = new CollectionPageViewModel();
+            collectionsInfo.CurrentPage = pageNumber;
+            collectionsInfo.CountOfPage = await GetCountOfPage(pageSize, isAdmin: true);
+
             var collections = await dbContext.Collections
                 .Include(c => c.Category)
                 .Skip((pageNumber - 1) * pageSize)
                 .Take(pageSize)
                 .ToListAsync();
-            return collections.Select(c => mapper.Map<CollectionModel>(c));
+            collectionsInfo.Collections = collections.Select(c => mapper.Map<CollectionModel>(c));
+            return collectionsInfo;
         }
 
         public async Task<CollectionPageViewModel> GetPageOfCollectionForUser(int pageSize, int pageNumber)
         {
             var collectionsInfo = new CollectionPageViewModel();
             collectionsInfo.CurrentPage = pageNumber;
-            var countOfPage = await dbContext.Collections
-                .Where(c => c.IsPrivate == false)
-                .CountAsync();
-            collectionsInfo.CountOfPage = (int)Math.Ceiling(countOfPage / (double)pageSize);
+            collectionsInfo.CountOfPage = await GetCountOfPage(pageSize, isAdmin: false);
+
             var collections = await dbContext.Collections
                 .Include(c => c.Category)
                 .Where(c => c.IsPrivate == false)
@@ -134,6 +137,25 @@ namespace UserCollection.Services.Database.Services
             customFields.CustomField3Name = customFields.CustomField3State ? customFields.CustomField3Name : string.Empty;
 
             return customFields;
+        }
+
+        private async Task<int> GetCountOfPage(int pageSize, bool isAdmin)
+        {
+            int countOfCollections = 0;
+            if (isAdmin)
+            {
+                countOfCollections = await dbContext.Collections
+                .CountAsync();
+            }
+            else
+            {
+                countOfCollections = await dbContext.Collections
+                .Where(c => c.IsPrivate == false)
+                .CountAsync();
+            }
+            
+
+            return (int)Math.Ceiling(countOfCollections / (double)pageSize);
         }
     }
 }

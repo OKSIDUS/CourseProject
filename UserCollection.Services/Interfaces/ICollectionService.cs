@@ -20,6 +20,6 @@ namespace UserCollection.Services.Interfaces
 
         public Task<CollectionPageViewModel> GetPageOfCollectionForUser(int pageSize, int pageNumber);
 
-        public Task<IEnumerable<CollectionModel>> GetPageOfCollectionForAdmin(int pageSize, int pageNumber);
+        public Task<CollectionPageViewModel> GetPageOfCollectionForAdmin(int pageSize, int pageNumber);
     }
 }

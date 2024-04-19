@@ -75,27 +75,27 @@ namespace UserCollection.Services.WebAPI
             return new List<CollectionModel>();
         }
 
-        public async Task<IEnumerable<CollectionModel>> GetPageOfCollectionForAdmin(int pageSize, int pageNumber)
+        public async Task<CollectionPageViewModel> GetPageOfCollectionForAdmin(int pageSize, int pageNumber)
         {
-            var respone = await httpClient.GetAsync($"Collection/Admin/page={pageNumber}/size={pageSize}");
-            if (respone.IsSuccessStatusCode)
+            var response = await httpClient.GetAsync($"Collection/Admin/page={pageNumber}/size={pageSize}");
+            if (response.IsSuccessStatusCode)
             {
-                var collections = await respone.Content.ReadFromJsonAsync<IEnumerable<CollectionModel>>();
+                var collections = await response.Content.ReadFromJsonAsync<CollectionPageViewModel>();
                 if (collections is not null)
                 {
                     return collections!;
                 }
             }
 
-            return new List<CollectionModel>();
+            return new CollectionPageViewModel();
         }
 
         public async Task<CollectionPageViewModel> GetPageOfCollectionForUser(int pageSize, int pageNumber)
         {
-            var respone = await httpClient.GetAsync($"Collection/page={pageNumber}/size={pageSize}");
-            if (respone.IsSuccessStatusCode)
+            var response = await httpClient.GetAsync($"Collection/page={pageNumber}/size={pageSize}");
+            if (response.IsSuccessStatusCode)
             {
-                var collections = await respone.Content.ReadFromJsonAsync<CollectionPageViewModel>();
+                var collections = await response.Content.ReadFromJsonAsync<CollectionPageViewModel>();
                 if (collections is not null)
                 {
                     return collections!;

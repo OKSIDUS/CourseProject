@@ -100,7 +100,7 @@ namespace UserCollection.WebAPP.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> AllCollections(int pageSize = 7, int pageNumber = 2)
+        public async Task<IActionResult> AllCollections(int pageSize = 7, int pageNumber = 1)
         {
             var user = await userManager.GetUserAsync(User);
             if ( user is not null && await userManager.IsInRoleAsync(user, "admin"))
